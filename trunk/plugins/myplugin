@@ -1,0 +1,30 @@
+;   Globals
+;   ------------------------------------
+;   #Res    - result
+;
+;   #fn     - file name without extension
+;   #fp     - file path
+;   #fe     - file extension
+;   #fd	    - file directory
+;   #no     - file number in the list
+;   #flag   - prev|real
+;
+;   #1	    - field or param1 if GetFields returns *
+;   #2	    - unit or param2 if GetFields returns *
+;   #3      - contains entire user string, if GetFields returns *
+;
+;   #tmp    - temporary placeholder (you can also use any of the above unused globals)
+;======================================================================================
+
+
+MyPlugin:
+	#Res := "My Plugin " #no
+return
+
+MyPlugin_GetFields:
+	#Res = 
+	(LTrim
+	   field1
+	   field2|unit21|unit22
+	)
+return

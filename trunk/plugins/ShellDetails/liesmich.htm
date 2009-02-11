@@ -1,0 +1,372 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>ShellDetails 1.12</title>
+<link href="./styles/layout.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="content">
+  <h1>ShellDetails 1.12</h1>
+      <p>ShellDetails ist ein Inhaltsplugin f&uuml;r den Total Commander.</p>
+      <h2>Inhaltsverzeichnis</h2>
+      <ol>
+        <li><a href="#description">Plugin-Beschreibung</a></li>
+        <li><a href="#requirements">Systemvorraussetzungen</a></li>
+        <li><a href="#use">Benutzung</a></li>
+        <li><a href="#configuration">Konfiguration</a>
+          <ol>
+            <li><a href="#fieldsearchdir">Verzeichnisse zur Feldsuche</a></li>
+            <li><a href="#fieldsettings">Feldeinstellungen</a></li>
+            <li><a href="#inilocation">ShellDetails.ini Ort</a></li>
+          </ol>
+        </li>
+        <li><a href="#troubleshooting">Problemlösungen</a></li>
+        <li><a href="#bugs_limitations">Bekannte Fehler und Einschränkungen</a></li>
+        <li><a href="#history">Versionschronik</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+        <li><a href="#license">Lizenz</a></li>
+      </ol>
+      <h2> 1. Plugin-Beschreibung<a name="description"></a></h2>
+      <p> ShellDetails zeigt alle Windows Explorer-Felder im Total Commander an.<br>
+  Neben Standardfeldern wie Name, Gr&ouml;&szlig;e, Typ, Attributen und verschiedenen Datumswerten gibt es auch noch viele weitere Felder.<br>
+  So kann z.B. der Besitzer einer Datei oder die Seitenanzahl in Dokumenten wie TIFF oder DOC angezeigt werden. <br>
+  Besonders interessant f&uuml;r die Suche sind Metadateninformationen wie Autor, Titel, Thema, Kategorie und Kommentar.<br>
+  F&uuml;r den Bereich Musikdateien d&uuml;rften die Felder Copyright, Interpret, Albumtitel, Jahr, Titelnummer, Genre, Dauer, Bitrate und Gesch&uuml;tzt relevant sein. Einige dieser Felder werden auch von Videodateien unterst&uuml;tzt.<br>
+  In der Kategorie Bilder gibt es die Felder Kameramodell, Bild aufgenommen am und Abmessungen. Hierbei werden nicht nur die Abmessungen von JPEG-Bildern angezeigt, sondern noch von vielen anderen Bildformaten.<br>
+  Au&szlig;erdem gibt es auch noch die Eigenschaften von Anwendungen und Bibliotheken wie Firma, Beschreibung, Dateiversion sowie Produktname und -version.<br>
+  Hinzu kommen noch die Felder, die von ShellExtensions angeboten werden. Hier einige Beispiele: </p>
+      <ul>
+        <li><a href="http://www.cadwerx.net/Products/CadXplorer/CxCadXplorer.asp">CAD Explorer</a></li>
+        <li><a href="http://www.pixvue.com/">PixVue</a></li>
+        <li><a href="http://www.tortoisecvs.org/">TortoiseCVS</a> </li>
+      </ul>      <p>Bemerkung: Die hier verwendeten Begriffe wurden einer deutschen Windows XP-Installation entnommen. Unter Windows 2000 sind die Bezeichnungen teilweise etwas anders.</p>
+      <h2> 2. Systemvorraussetzungen<a name="requirements"></a></h2>
+      <p> F &uuml;r diesen Plugin wird Total Commander 6.50  ben&ouml;tigt. <br>
+  Es werden die Betriebsysteme Windows 2000, XP und 2003 unterst&uuml;tzt.<br>
+  Wenn ShellDetails unter einem anderen Betriebssystem installierst wird, werden keine Felder angeboten.</p>
+      <h2>3. Benutzung<a name="use"></a></h2>
+      <p>ShellDetails ist ein Inhaltsplugin. Alle Plugins dieses Typen k&ouml;nnen einheitlich benutzt werden. Eine &Uuml;bersicht &uuml;ber die Benutzung von Inhaltsplugins findet sich im <a href="http://www.ghisler.ch/wikide/index.php/Inhaltsplugins">Total Commander Wiki</a>. </p>
+      <h2>4. Konfiguration<a name="configuration"></a></h2>
+      <h3>4.1 Verzeichnisse zur Feldsuche<a name="fieldsearchdir"></a></h3>
+      <p>Welche Felder zur Anzeige verf&uuml;gbar sind, ist von Verzeichnis zu Verzeichnis unterschiedlich. Es gibt deshalb die M&ouml;glichkeit Verzeichnisse anzugeben, in denen nach Feldern gesucht wird. Zum  Beispiel werden die Felder, die das Programm TortoiseCVS zur Verf&uuml;gung stellt, nur in Verzeichnissen angeboten, die auch tats&auml;chlich  unter CVS-Kontrolle stehen. Wenn also TortoiseCVS benutzt wird und sich  C:\MeinProjekt unter CVS-Kontrolle befindet, dann sollte man in der Konfigurationsdatei Shelldetails.ini folgendes eintragen: </p>
+      <pre>[Directories]
+Dir_1=C:\MeinProjekt
+</pre>
+      <p>Es ist nicht notwendig zus&auml;tzlich noch ein Verzeichnis anzugeben, indem sich die &uuml;blichen Felder befinden. Wenn kein Verzeichnis angegeben wurde, verwendet ShellDetails das Windows-Verzeichnis zu Suche nach Feldern. </p>
+      <h3>4.2 Feldeinstellungen <a name="fieldsettings"></a></h3>
+      <p>ShellDetails wird eine Einstellungsdatei mit dem Namen ShellDetails.ini anlegen. Sie kann benutzt werden um Feldtypumwandlungen (castings), Berechnungen und andere Einstellungen durchzuf&uuml;hren. Jeder Abschnitt ist mit einem eindeutigen Namen benannt. Du musst und solltest die Abschnittsnamen nicht bearbeiten. Ein Abschnitt kann die folgenden Eintr&auml;ge einthalten.</p>
+      <table width="100%" border="0">
+        <tr>
+          <td width="20%"><strong>Standardwert</strong></td>
+          <td width="20%"><strong>M&ouml;gliche Werte</strong></td>
+          <td width="60%"><strong>Beschreibung</strong></td>
+        </tr>
+        <tr>
+          <td class="list">UseDefault=1</td>
+          <td class="list">0, 1</td>
+          <td class="list">Wenn man diesen Wert auf 0 setzt, dann werden Typumwandlungen und Berechnungen aktiviert. Andernfalls wird der Standardtyp benutzt.</td>
+        </tr>
+        <tr>
+          <td class="list">Cast=1</td>
+          <td class="list">2, 3, 5</td>
+          <td class="list"><p>Wandelt den Feldtyp in eine anderen Feldtyp um. Unterst&uuml;tzte Feldtypen sind im Augenblick:<br>
+            Nummerisch --&gt; Datum<br>
+            Nummerisch --&gt; 
+            Gleitkommazahl<br>
+            Zeichenkette --&gt; Nummerisch</p>
+            <p>Erlaubte Werte f&uuml;r den Zielfeldtyp sind nummerisch (2) und Datum (5).</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="list">Operator=47</td>
+          <td class="list">47</td>
+          <td class="list">Der einzig erlaubte Wert ist 47, was dem Zeichen / entspricht. das bedeutet, dass Division, die derzeit einzig unterst&uuml;tzte Rechenoperation ist.</td>
+        </tr>
+        <tr>
+          <td class="list">Processing=0</td>
+          <td class="list"> <strong></strong>0, 1, 2, 3 </td>
+          <td class="list">Legt fest wie die Werte in einer benutzerdefinierten Spaltenansicht angezeigt werden.<br>
+            0=Wie im Explorer.<br>
+            1=Vordergrund<br>
+            2=Hintergrund automatisch <br>
+            3=Hintergrund bei Bedarf </td>
+        </tr>
+        <tr>
+          <td >Caption</td>
+          <td >&nbsp;</td>
+          <td >Die Bezeichnung, die der Benutzer im Total Commander sieht. </td>
+        </tr>
+      </table>
+      <p>Hier sind einige n&uuml;tzliche Beispiele f&uuml;r im Explorer eingebaute Felder:</p>
+      <pre>;Zeigt die Dateigr&ouml;&szlig;e in KB an.
+[{B725F130-47EF-101A-A5F1-02608C9EEBAC}12]
+UseDefault=0
+Cast=2
+Operator=47
+Operand=1024</pre>
+      <pre>;Zeigt die Dauer von Audio- oder Videodateien als Zeitwert an.
+[{64440490-4C8B-11D1-8B70-080036B11A03}3]
+UseDefault=0
+Cast=5
+Operator=47
+Operand=10000000</pre>
+      <pre>;Zeigt die Bitrate f&uuml;r Audiodateien als kbits/sec an. Das Feld wird als &quot;bei Bedarf&quot; angezeigt.
+[{64440490-4C8B-11D1-8B70-080036B11A03}4]
+UseDefault=0
+Cast=2
+Operator=47
+Operand=1000
+Processing=3</pre>
+      <pre>;Korrigiert den Explorer Fehler, der &quot;Aufgenommen am&quot; als String extrahiert.
+[{14B81DA1-0135-4D31-96D9-6CBFC9671A99}36867]
+UseDefault=0
+Cast=10</pre>
+      <pre>
+;Unbenannte Feldbezeichnung auf &quot;Breite&quot; ge&auml;ndert und in einen Zahlenwert umgewandelt.
+[{6444048F-4C8B-11D1-8B70-080036B11A03}3]<br>UseDefault=0<br>Caption=Breite<br>Cast=2
+
+
+;Wandelt das &quot;Fragment&quot;-Feld in einen nummerischen Wert um, um nach nach dem Feld suchen zu k&ouml;nnen.
+[{242ED098-D606-4FA8-9DDE-89AEDFE4EAD7}0]<br>Caption=Fragments<br>UseDefault=0<br>Cast=2<br>State=98</pre>
+      <h3> 4.3 ShellDetails.ini Ort <a name="inilocation"></a></h3>
+      <ul>
+        <li>ShellDetails.ini wird standardm&auml;&szlig;ig im gleichen Verzeichnis wie die Datei Wincmd.ini gespeichert. Falls gew&uuml;nscht kann diese Datei auch in eins der folgenden Verzeichnisse verschoben werden:</li>
+        <li>Unterverzeichnis mit dem Namen &quot;ShellDetails&quot; relativ zu dem Verzeichnis, in dem sich die Datei Wincmd.ini befindet</li>
+        <li>Plugin-Verzeichnis</li>
+        <li> Total Commander Verzeichnis</li>
+      </ul>      
+      <h2>5. Probleml&ouml;sungen<a name="troubleshooting"></a></h2>
+      <ol>
+        <li><strong>Frage:</strong> Ein Feld wird vom Plugin nicht angeboten, aber kann im Windows Explorer ausgew&auml;hlt werden. Was kann ich tun?<br>
+          <strong>Antwort:</strong> Bitte mal im Abschnitt 3. Verzeichnisse zur Feldsuche nachschauen. In diesem Abschnitt ist erl&auml;utert, wie die fehlenden Felder erg&auml;nzt werden k&ouml;nnen. </li>
+        <li><strong>Frage:</strong> Ein Feld wird nicht angezeigt wie erwartet. Was kann ich tun?<br>
+          <strong>Antwort: </strong>Bitte starte den Windows Explorer und f&uuml;ge dort die Spalte hinzu. Wenn die Spaltenwerte hier auch nicht angezeigt werden, dann ist es definitv kein Fehler in ShellDetails. In allen anderen F&auml;llen bitte mir das Problem berichten.</li>
+      </ol>      
+      <h2>6. Bekannte Fehler und Einschr&auml;nkungen <a name="bugs_limitations"></a></h2>
+      <ol>
+        <li>Die Anzeige von Datumswertes weicht um ein paar Sekunden ab. Der Grund daf&uuml;r liegt in der Art und Weise wie die von Windows bereitgestellte Schnittstelle die Datumswerte speichert. Im Windows Explorer tritt das gleiche Problem auf. </li>
+        <li>Wenn sich in einem Verzeichnis nur eine Datei befindet und sich eine Dateiinformation &auml;ndert, so muss das Verzeichnis erneut betreten werden, um die Anzeige zu aktualisieren. </li>
+  </ol>      
+      <h2>7. Versionschronik <a name="history"></a></h2>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="list"><strong>Version 1.12 </strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Felder, die bestimmte nicht erlaubte Zeichen enthielten, wurden nicht korrekt umbenannt.</td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.11</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Felderkennung war versehentlich deaktiviert.</td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.10</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Es ist nun m&ouml;glich eine Zahl ohne Tausendertrennzeichen darzustellen. Dazu muss in der Einstellungsdatei bei dem betreffenden Feld UseDefault auf 0 und Cast auf 3 gesetzt werden. </td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Einige Ressourcenl&ouml;cher wurden gestopft. </td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.09 </strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Es k&ouml;nnen nun auch Zeichenketten in nummerische werte umgewandelt werden. </td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.08 </strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Eine gro&szlig;e Zahl installierter Shellerweiterungen brachte Total Commander w&auml;hrend der Konfiguration der Benutzung von Inhaltsplugins zum Absturz. </td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.07</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Der Feldtyp wurde in einigen F&auml;llen nicht richtig erkannt, was zu einem Abbruch der Feldererkennung f&uuml;hrte. </td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.06 </strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Wenn manuell kein Verzeichnis zur Suche nach Feldern gesetzt war, dann wurden keine neue installierten Shellerweiterungen gefunden.</td>
+        </tr>
+        <tr>
+          <td class="list">GE&Auml;NDERT</td>
+          <td class="list">Der Plugin ist von nun an nicht mehr mit UPX komprimiert. Das hat auf einigen Systemen zu Problemen gef&uuml;hrt. </td>
+        </tr>
+        <tr>
+          <td class="list">GE&Auml;NDERT</td>
+          <td class="list">Das Standardverzeichnis in das die Datei ShellDetails.gespeichert wurdeist nun das gleiche Verzeichnis indem sich auch die Datei Wincmd.ini befindet.</td>
+        </tr>
+        <tr>
+          <td class="list">&nbsp;</td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.05 </strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Aktualisierung funktionierte nicht richtig.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Es kann nun die Beschriftung eines jeden Feldes ge&auml;ndert werden.</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Die Einstellungsdatei wurde in manchen F&auml;llen nicht gespeichert.<br></td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Wenn eine Shell Extension installiert war, die ung&uuml;ltige Zeichen im Feldnamen enthielt, wurde eine Fehlermeldung angezeigt. Diese ung&uuml;ltigen Zeichen werden nun durch einen Unterstrich ersetzt.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Die Verzeichnisse, in denen nach neuen Feldern gesucht wird, k&ouml;nnen nun vom Benutzer festgelegt werden. </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list" width="17%"><strong>Version 1.04</strong></td>
+          <td class="list" width="83%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Einige Ressourcenl&ouml;cher wurden gestopft.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Unterst&uuml;tzung f&uuml;r nicht benannte Felder wurde hinzugef&uuml;gt.</td>
+        </tr>
+        <tr>
+          <td class="list">GE&Auml;NDERT</td>
+          <td class="list">Geschwindigkeitsverbesserungen, gerade wenn viele Spalten dargestellt werden. </td>
+        </tr>
+        <tr>
+          <td >&nbsp;</td>
+          <td >&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.03</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">ShellDetails unterst&uuml;tzt nun Hintergrundverarbeitung f&uuml;r die benutzerdefinierte Spaltensicht.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Die neue Feldeinstellung &quot;Prcoessing&quot; (Verarbeitung) wurde hinzugef&uuml;gt. Bitte im Abschnitt &quot;Feldeinstellungen nach weiteren Informationen schauen.</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.02</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Dateityp von Verzeichnissen wurde falsch angezeigt.</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Der Plugin st&uuml;rzte unter Windows 9x und Windows NT 4.0 ab. Das hei&szlig;t aber nicht, dass er jetzt unter diesen Betriebssystemen l&auml;uft. Es werden keine Felder zur Auswahl angeboten.</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Plugin st&uuml;rzte in manchen speziellen Verzeichnissen ab.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Unterst&uuml;tzung f&uuml;r numerische Feldtypen sowie f&uuml;r die Typen DateTime (Datum und Zeit) und Time (Zeit) hinzugef&uuml;gt.</td>
+        </tr>
+        <tr>
+          <td class="list">HINZUGEF&Uuml;GT</td>
+          <td class="list">Unterst&uuml;tzung f&uuml;r Feldeinstellungen hinzugef&uuml;gt. Bitte im Abschnitt &quot;Feldeinstellungen nach weiteren Informationen schauen.</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.01</strong></td>
+          <td class="list">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list">GE&Auml;NDERT</td>
+          <td class="list">Plugin ist um ein Vielfaches schneller als 1.00.</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Feldinhalte sind nun immer im richtigen Feld.</td>
+        </tr>
+        <tr>
+          <td class="list">KORRIGIERT</td>
+          <td class="list">Feldinhalte f&uuml;r *.lnk-Dateien werden nun angezeigt.</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="list"><strong>Version 1.00</strong></td>
+          <td class="list">Erste Ver&ouml;ffentlichung.</td>
+        </tr>
+      </table>
+      <h2>8. Kontakt<a name="contact"></a></h2>
+      <p>Im <a href="http://www.ghisler.ch/">Total Commander Forum</a> steht ein <a href="http://www.ghisler.ch/board/viewtopic.php?t=9525">Thema</a> bereit, um Probleme, Fehler und Verbesserungsvorschl&auml;ge zu diskutieren.</p>
+      <h2>9. Lizenz<a name="license" id="license"></a></h2>
+      <p>Copyright (C) 2004-2006 Christian Hillbricht, Alle Rechte vorbehalten. Dieser Total Commander plugin ist urheberrechtlich gesch&uuml;tzte Freeware.</p>
+</div>
+</body>
+</html>
