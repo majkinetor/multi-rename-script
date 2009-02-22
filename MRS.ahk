@@ -4,6 +4,7 @@ SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
 #SingleInstance, force
 #NoEnv
+#MaxThreads, 20
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
