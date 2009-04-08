@@ -70,10 +70,10 @@ GuiCreate(){
 
 
   ;combos
-	Gui, Add, ListView, g_OnComboX vcxMask HWNDhcxMask xm ym+40 w280 r10  -Hdr -Multi altsubmit hidden, FN|Ext
+	Gui, Add, ListView, g_OnComboX vcxMask HWNDhcxMask xm ym+42 w280 r10  -Hdr -Multi altsubmit hidden, FN|Ext
 	ComboX( hcxMask ), LV_ModifyCol(1, 205), LV_ModifyCol(2, 50)
 
-	Gui, Add, ListView, g_OnComboX vcxSR HWNDhcxSR xm+320 ym+40 w195 r10 -Hdr -Multi altsubmit hidden, Search|Replace
+	Gui, Add, ListView, g_OnComboX vcxSR HWNDhcxSR xm+320 ym+42 w195 r10 -Hdr -Multi altsubmit hidden, Search|Replace
 	ComboX( hcxSR ), LV_ModifyCol(1, 100), LV_ModifyCol(2, 90)
 
 	Gui, ListView, lvFiles
@@ -88,11 +88,11 @@ GuiCreateExpansion() {
 	global
 
 	Gui, Font,,Verdana
-	Gui, Add, Button, xs+5  0x8000 h20 w85 g_OnExpButton vbExpFileName, File &name
-	Gui, Add, Button, x+5   0x8000 h20 w85 g_OnExpButton vbExpRange,	R&ange
-	Gui, Add, Button, x+5   0x8000 h20 w85 g_OnExpButton vbExpCounter,	C&ounter
-	Gui, Add, Button, x+5   0x8000 h20 w85 g_OnExpButton vbExpDateTime, &Date && Time
-	Gui, Add, Button, x+5   0x8000 h20 w85 g_OnExpButton vbExpPlugins,	&Plugins
+	Gui, Add, Button, xs+5  0x8000 h20 w90 g_OnExpButton vbExpFileName, File &name
+	Gui, Add, Button, x+5   0x8000 h20 w90 g_OnExpButton vbExpRange,	R&ange
+	Gui, Add, Button, x+5   0x8000 h20 w90 g_OnExpButton vbExpCounter,	C&ounter
+	Gui, Add, Button, x+5   0x8000 h20 w90 g_OnExpButton vbExpDateTime, &Date && Time
+	Gui, Add, Button, x+5   0x8000 h20 w90 g_OnExpButton vbExpPlugins,	&Plugins
 	Gui, Add, Button, x+5   0x8000 h20 w25 g_OnExpButton vbExpCase,		aA
 
 

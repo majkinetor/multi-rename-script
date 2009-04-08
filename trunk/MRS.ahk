@@ -1,15 +1,18 @@
-SetBatchLines, -1
-#NoTrayIcon
-#include %A_ScriptDir%
-SetWorkingDir, %A_ScriptDir%
 #SingleInstance, force
 #NoEnv
-#MaxThreads, 20
+
+SetBatchLines, -1
+#NoTrayIcon
+
+#include %A_ScriptDir%
+SetWorkingDir, %A_ScriptDir%
+
+#MaxThreads, 255
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
 	gVersion	:= "1.0 w"
-	gGuiHeight	:= 500,  gGuiWidth	:= 730
+	gGuiHeight	:= 550,  gGuiWidth	:= 800
 	gResultList	:= "res\ResultList.txt"
 	gPreviewFile:= "res\Preview.txt"
 	gConfig		:= "MRS.ini"
