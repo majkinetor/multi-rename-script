@@ -8,7 +8,7 @@
 ;			Initialises control as ComboX control
 ; 
 ; Parameters:
-;			hCombo	- handle of the control that is to get combobox behavior
+;			hCombo	- handle of the control which is to get combobox behavior
 ;
 ComboX( hCombo ) {
 	DllCall("SetWindowPos", "uint", hCombo, "uint", 0,   "uint", 0, "uint", 0, "uint", 0, "uint", 0,    "uint", 3)
@@ -27,11 +27,12 @@ ComboX_Show( hCombo ) {
 	global ComboX_Active
 
 	DllCall("ShowWindow", "uint", hCombo, "uint", 5)	;to avoid SetWindDelay config
-	Sleep 30
+	Sleep 20
+
+ 	ControlFocus, ,ahk_id %hCombo%
+	Sleep 20
 
 	ComboX_Redraw( hCombo )
- 	ControlFocus, ,ahk_id %hCombo%
-
 	ComboX_Active := hCombo
 }
 
@@ -44,6 +45,7 @@ ComboX_Show( hCombo ) {
 ;
 ComboX_Hide( hCombo ) {
 	DllCall("ShowWindow", "uint", hCombo, "uint", 0) 
+	ComboX_Active := 0
 }
 
 ;----------------------------------------------------------------------------
@@ -59,7 +61,7 @@ ComboX_setWndProc(hCtrl) {
 		return
 	}
 
-	newProcAddr := RegisterCallback("ComboX_WndProc", "F", 4, &proc + cnt*4)
+	newProcAddr := RegisterCallback("ComboX_WndProc", "", 4, &proc + cnt*4)
     old := DllCall("SetWindowLong", "UInt", hCtrl, "Int", -4, "Int", newProcAddr, "UInt")
 	NumPut(old, &proc+cnt*4)
 }
@@ -67,9 +69,8 @@ ComboX_setWndProc(hCtrl) {
 
 ComboX_wndProc(hwnd, uMsg, wParam, lParam){ 
 	global ComboX_Active
-	old := NumGet(A_EventInfo+0)	
 
-	res := DllCall("CallWindowProcA", "UInt", old, "UInt", hwnd, "UInt", uMsg, "UInt", wParam, "UInt", lParam) 
+	res := DllCall("CallWindowProcA", "UInt", NumGet(A_EventInfo+0), "UInt", hwnd, "UInt", uMsg, "UInt", wParam, "UInt", lParam) 
 	if (uMsg = 8)
 		ComboX_Hide(hwnd), ComboX_Active := "" 
 	return res 
