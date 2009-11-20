@@ -12,14 +12,21 @@ Functions:
 Chain Example:
 
 Presets\dummy.mrs
- Mask("[C10+5:2]. [N4-]")
- SR("_", " ", "full")
- Case("Upper")
+ Mask("[C10+5:2]. [N4-]"), SR("_", " ", "full"), Case("Upper")  
  Mask("backup [N] backup")
 
+API:
+1. NewFileList := Rename(FileList, mrs, [Handler, bSimulate]) - Evaluate rename functions on a file list
+2. Undo(FileList, NewFileList)
 
+Handler(no, filename, newfilename)  --before renaming, return ErrorLevel (1 skip, 2 stop)
+ 
 
-ProcessFile(fn, ?) - Evaluate rename functions on file
+Preview:
+Rename( mrs, VisibleFiles, PreviewHandler)
 
+PreviewHandler(no, filename, newfilename) {
+   UpdateColumn(Top+no, newFileName)
+}
 
 }}}
