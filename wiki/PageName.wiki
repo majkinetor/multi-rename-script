@@ -21,7 +21,8 @@ Presets\dummy.mrs
 # NewFileList := Rename(FileList, mrs, [Handler, bSimulate]) - Evaluate rename functions on a file list
 # Undo(FileList, NewFileList)
 
-* Handler(no, filename, newfilename)  --before renaming, return ErrorLevel (1 skip, 2 stop)
+* Handler(no, filename, newfilename) 
+  before renaming, return ErrorLevel (1 skip, 2 stop)
  
 
 == Preview ==
