@@ -1,0 +1,17 @@
+*v2.0*
+
+1. Create renaming framework.
+2. Change UI, use Forms
+
+File Rename Engine:
+
+
+Functions:
+- Mask
+- SR
+- Case
+
+ProcessFile(fn, ?) - Evaluate rename functions on file
+
+
+
