@@ -1,3 +1,4 @@
+{{{
 *v2.0*
 
 1. Create renaming framework.
@@ -13,5 +14,4 @@ Functions:
 
 ProcessFile(fn, ?) - Evaluate rename functions on file
 
-
-
+}}}
