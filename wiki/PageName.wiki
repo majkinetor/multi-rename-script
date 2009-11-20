@@ -2,10 +2,10 @@
 
 ==Functions==
 
-* Mask, NMask, EMask  (mask plugins)
-* SR, NSR, ESR
-* Case, NCase, ECase
-* UDF (Filter etc...)
+ * Mask, NMask, EMask  (mask plugins)
+ * SR, NSR, ESR
+ * Case, NCase, ECase
+ * UDF (Filter etc...)
 
 ==Chain Example==
 
@@ -18,12 +18,12 @@ Presets\dummy.mrs
 }}}
 
 == API ==
-# NewFileList := Rename(FileList, mrs, [Handler, bSimulate]) - Evaluate rename functions on a file list
-# Undo(FileList, NewFileList)
+ # NewFileList := Rename(FileList, mrs, [Handler, bSimulate]) - Evaluate rename functions on a file list
+ # Undo(FileList, NewFileList)
 
-* Handler(no, filename, newfilename) 
-  before renaming, return ErrorLevel (1 skip, 2 stop)
- 
+ * Handler(Filename, p1, p2, p3) 
+  * triggered before renaming, return ErrorLevel to influence it (1 skip, 2 stop)
+  * events: beforeRename: (p1=no, p2=newfilename), errorMessage: (p1=no, p2=newfileame, p3=errmsg)
 
 == Preview ==
 {{{
