@@ -27,7 +27,7 @@ Presets\dummy.mrs
 
 == Preview ==
 {{{
-Rename( mrs, VisibleFiles, PreviewHandler)
+Rename( mrs, VisibleFiles, PreviewHandler, bSimulate := TRUE)
 
 PreviewHandler(no, filename, newfilename) {
    UpdateColumn(Top+no, newFileName)
