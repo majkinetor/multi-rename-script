@@ -1,0 +1,7 @@
+[PluginInstall]
+Description=Plugin Image Info 1.42 shows width, height, color depth, etc.
+Type=wdx
+File=Images.wdx
+DefaultDir=wdx_Image_Info_1.42
+Readme=Readme.txt
+Descriptionrus=Плагин Image Info 1.42 показывает высоту, ширину, глубину цвета, и т.д.

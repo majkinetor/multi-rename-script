@@ -1,0 +1,32 @@
+BODY {
+	font-family : Arial, Tahoma, Helvetica, sans-serif;
+	margin-left : 8%;
+	margin-right : 5%;
+}
+
+PRE  {
+     margin-left: 5%;
+}
+
+H3 {
+	border-bottom: solid;
+	border-width: 1px;
+	padding: 5px;
+	color : #990000;
+	font-family : Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	font-size : 140%;
+	margin-left : -5%;
+	margin-top : 2em;
+}
+
+BLOCKQUOTE {
+	margin-left : 0;
+}
+
+TH {
+	background-color : #FFFFFF;
+}
+
+TD {
+	background-color : #F0F0F0;
+}
