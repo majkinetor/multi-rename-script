@@ -1,14 +1,18 @@
-; Title:	TCwdx
-;			Functions to work with Total Commander content plugins
+/*
+ Title:	TCwdx
+		Total Commander Content Plugin API
+ */
 
+/*
+ Function:	FindIni
+			Find full path of the TC wincmd.ini.
 
-;-----------------------------------------------------------------
-; Function: FindIni
-;			Find full path of the TC wincmd.ini 
-;
-; Returns:	
-;			Path if ini is found or nothing otherwise
-;
+ Returns:	
+			Path if ini is found or nothing otherwise.
+
+ Remarks:
+			Search at Registry and COMMANDER_PATH environment variable.
+ */
 TCwdx_FindIni() {
 	RegRead, ini, HKEY_CURRENT_USER, Software\Ghisler\Total Commander, IniFileName
 	if FileExist(ini)
@@ -22,18 +26,17 @@ TCwdx_FindIni() {
 	}
 }
 
+/*
+ Function:	GetPluginsFromDir
+			Get list of plugins from directory (no wincmd.ini is used).
 
-;-----------------------------------------------------------------
-; Function: GetPluginsFromDir
-;			Get list of plugins from directory (no wincmd.ini is used)
-;
-; Parameters:
-;			path -	Base path. Plugnins should be in folders with equal name as their own.
-;
-; Returns:	
-;			String in Ini_ format: name=path
-;
-TCwdx_GetPluginsFromDir( path ) {
+ Parameters:
+			Path -	Base path. Plugins should be in folders with equal name as their own.
+
+ Returns:	
+			String in Ini_ format: name=path
+ */
+TCwdx_GetPluginsFromDir( Path ) {
 	loop, %path%\*, 2
 	{
 		tcPlug :=  A_LoopFileFullPath "\" A_LoopFileName ".wdx"
@@ -43,27 +46,25 @@ TCwdx_GetPluginsFromDir( path ) {
 	return SubStr(res, 1, -1)
 }
 
-;-----------------------------------------------------------------
-; Function: GetPlugins
-;			Get list of installed tc plugins.
-;
-; Parameters:
-;			pIni	-	TC wincmd.ini path or "" to try to get ini location from registry or using
-;						machine environment variable COMMANDER_PATH
-;
-; Returns:	
-;			String in Ini_ format: name=path or ERR if ini can not be found
-;
-TCwdx_GetPlugins( pIni="" ) {
-	if pini =
-		pIni := TCwdx_FindIni()
-	if !FileExist(pIni)
+/*
+ Function:	GetPlugins
+			Get list of installed TC plugins using wincmd.ini.
+
+ Parameters:
+			IniFile	-	TC wincmd.ini path or "" to try to get ini location using <FindIni> function.
+
+ Returns:	
+			String in format: name=path or ERR if ini can not be found
+ */
+TCwdx_GetPlugins( IniFile="" ) {
+	ifEqual, IniFile,, SetEnv, IniFile, % TCwdx_FindIni()
+	if !FileExist(IniFile)
 		return "ERR"
 
 	VarSetCapacity(dest, 512) 
 
 	inSec := 0
-	Loop, read, %pIni%
+	Loop, read, %IniFile%
 	{
 		s := A_LoopReadLine
 		if (!inSec){
@@ -85,60 +86,63 @@ TCwdx_GetPlugins( pIni="" ) {
 	}
 	return SubStr(res, 1, -1)
 }
-;-----------------------------------------------------------------
-; Function: LoadPlugin
-;			Load plugin dll into the memory	and sets its default params
-;
-; Parameters:
-;			tcplug	- Path to TC content plugin
-;
-;		
-TCwdx_LoadPlugin(tcplug) {
-	h := DllCall("LoadLibrary", "str", tcplug),  TCwdx_SetDefaultParams(tcplug)
+/*
+ Function:	LoadPlugin
+			Load plugin dll into the memory	and set its default parameters.
+
+ Parameters:
+			PluginPath	- Path to TC content plugin.
+
+ Returns:	
+			Handle to the plugin dll.
+
+ */		
+TCwdx_LoadPlugin( PluginPath ) {
+	h := DllCall("LoadLibrary", "str", PluginPath),  TCwdx_SetDefaultParams(PluginPath)
  	return 	h
 }
 
-;-----------------------------------------------------------------
-; Function: UnloadPlugin
-;			Unloads plugin dll
-;
-; Parameters:
-;			htcplug	- Handle returned by LoadPlugin function
-;
-TCwdx_UnloadPlugin(htcplug){
-	return 	DllCall("FreeLibrary", "UInt", htcplug) 
+/*
+ Function:  UnloadPlugin
+			Unloads plugin dll.
+
+ Parameters:
+			HPlugin	- Handle returned by LoadPlugin function.
+ */
+TCwdx_UnloadPlugin(HPlugin){
+	return DllCall("FreeLibrary", "UInt", HPlugin) 
 }
 
-;-----------------------------------------------------------------
-; Function: GetPluginFields
-;			Get list of plugin fields
-;
-; Parameters:
-;			tcplug	-	Path to TC content plugin
-;			format	-	If omited, only field names will be returned, if set to "ini" string will be in Ini_ format, field=index|unit1|unit2...|unitN
-;						or field=index if there is no unit for given field, if "menu", string will be in ShowMenu format with "|" as item separator and root 
-;						of the menu named "tcFields".
-;
-; Returns:	
-;			String with fields on each line									 
-;
-TCwdx_GetPluginFields( tcplug, format="" ) {
-	if format = ""
-		 format = 0			;def
-	else if format = "ini"
-		 format = 1			;ini
-	else format = 2			;menu
+/*
+ Function:	GetPluginFields
+			Get list of plugin fields.
+
+ Parameters:
+			Plugin	-	Path to TC content plugin.
+			Format	-	If omited, only field names will be returned, if set to "ini" string will be in Ini_ format, field=index|unit1|unit2...|unitN
+						or field=index if there is no unit for given field, if "menu", string will be in ShowMenu format with "|" as item separator and root 
+						of the menu named "tcFields".
+
+ Returns:	
+			String with fields on each line									 
+ */
+TCwdx_GetPluginPathFields( PluginPath, Format="" ) {
+	if Format = ""
+		 Format = 0			;def
+	else if Format = "ini"
+		 Format = 1			;ini
+	else Format = 2			;menu
 
 	VarSetCapacity(name,512), VarSetCapacity(units,512)
 	loop {
-		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
+		r := DllCall(PluginPath "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, break										;ft_nomorefields=0
 		VarSetCapacity(name,-1) , VarSetCapacity(units,-1)
 		IfEqual, r, 7, SetEnv, units								;multiple fields are not units
 
-		if format = 0
+		if Format = 0
 			     res .= name "`n"
-		else if format = 1
+		else if Format = 1
 			     res .= name "=" A_Index-1 (units !="" ? "|" units : "")  "`n"
 		else 
 			if (units != "") 
@@ -148,31 +152,31 @@ TCwdx_GetPluginFields( tcplug, format="" ) {
 	}
 
 	StringTrimRight, res, res, 1
-	if format = 2
+	if Format = 2
 		res := "[tcFields]`n" res "`n" resu
 
 	return res
 }
 
-;-----------------------------------------------------------------
-; Function: GetField
-;			Get field data
-;
-; Parameters:
-;			FileName -	File name for which info is to be retreived
-;			tcplug	 -	Path to TC content plugin
-;			fi		 -	Field index, by default 0
-;			ui		 -  Unit index, by default 0
-;
-; Returns:	
-;			Field data
-;
-TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
+/*
+ Function:	GetField
+			Get field data.
+
+ Parameters:
+			FileName	- File name for which info is to be retreived.
+			PluginPath  - Path to TC content plugin.
+			FieldIndex	- Field index, by default 0.
+			UnitIndex	- Unit index, by default 0.
+
+ Returns:	
+			Field data.
+ */
+TCwdx_GetFieldIndexeld(FieldIndexleName, PluginPath, FieldIndex=0, UnitIndex=0){
 	static i=0, info, st
 	if (!i++)
-		VarSetCapacity(info,256), VarSetCapacity(st, 16)		;reserve buffers only on first call
+		VarSetCapacity(info,256), VarSetCapacity(st, 16)		;reserve buffers only on FieldIndexrst call
 
-	type := DllCall(tcplug "\ContentGetValue", "str", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
+	type := DllCall(PluginPath "\ContentGetValue", "str", FieldIndexleName, "int", FieldIndex, "int", UnitIndex, "UnitIndexnt", &info, "int", 256, "int", 0)
 	if (type <=0 or type=9) 
 		return
 	goto TCwdx_Type_%type%
@@ -192,64 +196,71 @@ TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
 	TCwdx_Type_8:
 		VarSetCapacity(info,-1)						;ft_string
 		return info
-	TCwdx_Type_10:									;A timestamp of type FILETIME, as returned e.g. by FindFirstFile(). It is a 64-bit value representing the number of 100-nanosecond.
-		r := DllCall("FileTimeToSystemTime", "uint", &info, "uint", &st)
+	TCwdx_Type_10:									;A timestamp of type FieldIndexLETIME, as returned e.g. by FieldIndexndFieldIndexrstFieldIndexle(). It is a 64-bit value representing the number of 100-nanosecond.
+		r := DllCall("FieldIndexleTimeToSystemTime", "UnitIndexnt", &info, "UnitIndexnt", &st)
 		ifEqual r, 0, return
 		return NumGet(st, 0, "UShort") "." NumGet(st, 2, "UShort") "." NumGet(st, 6, "UShort") " " NumGet(st, 8, "UShort") "." NumGet(st, 10 ,"UShort") "." NumGet(st, 12, "UShort")
 }
 
-;-----------------------------------------------------------------
-; Function: GetIndices
-;			Get index of field and optionaly its unit
-;
-; Parameters:
-;			tcplug	 -	Path to TC content plugin
-;			field	 -	Field for which index is to be returned. If unit is to be returned, use "Field.Unit" notation.
-;			fi		 -	Reference to variable to receive field index or empty string if field is not found.
-;			ui		 -	Optional Reference to variable to receive unit index or empty string if field is not found.
-;						If unit is is not requested ui will be set to 0.
-;
-TCwdx_GetIndices(tcplug, field, ByRef fi, ByRef ui="."){
+/*
+ Function:	GetIndices
+			Get index of field and optionaly its unit.
 
-	fi := "", ui = 0
-	if j := InStr(field, ".") 
-		unit := SubStr(field, j+1), field := SubStr(field, 1, j-1)
+ Parameters:
+			PluginPath		- Path to TC content plugin
+			Field			- Field for which index is to be returned. If unit is to be returned, use "Field.Unit" notation.
+			out FieldIndex	- Reference to variable to receive field index or empty string if field is not found.
+			out UnitIndex	- Optional Reference to variable to receive unit index or empty string if field is not found.
+							  If unit is is not requested UnitIndex will be set to 0.
+ */
+TCwdx_GetIndices(tcplug, Field, ByRef FieldIndex, ByRef UnitIndex="."){
+
+	FieldIndex := "", UnitIndex = 0
+	if j := InStr(Field, ".") 
+		unit := SubStr(Field, j+1), Field := SubStr(Field, 1, j-1)
 
 	VarSetCapacity(name,512), VarSetCapacity(units,512)
 	loop {
-		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
-		IfEqual, r, 0, return										;ft_nomorefields=0
+		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "UnitIndexnt", &name, "UnitIndexnt", &units, "UnitIndexnt", 512)
+		IfEqual, r, 0, return										;ft_nomoreFields=0
 		VarSetCapacity(name,-1)
 
-		if (name=field) {
-			fi := A_Index - 1
-			if (ui != ".") and (unit != "") {
+		if (name=Field) {
+			FieldIndex := A_Index - 1
+			if (UnitIndex != ".") and (unit != "") {
 				VarSetCapacity(units,-1) 
 				loop, parse, units, |
 					if (A_LoopField=unit) {
-						ui := A_Index - 1
+						UnitIndex := A_Index - 1
 						return
 					}
-				ui := ""
+				UnitIndex := ""
 			}
 			return
 		}
 	}	
 }
 
-;-----------------------------------------------------------------
-; Function: SetDefaultParams
-;			Mandatory function for some plugins (like ShellDetails)
-;
-; Parameters:
-;			tcplug	- Path to tc content plugin
-;
-TCwdx_SetDefaultParams(tcplug){
+/*
+ Function: SetDefaultParams
+			Mandatory function for some plugins (like ShellDetails)
+
+ Parameters:
+			PluginPath	- Path to tc content plugin
+ */
+TCwdx_SetDefaultParams(PluginPath){
 	VarSetCapacity(dps, 272, 0)
 	NumPut(272, dps, "Int"), NumPut(30, dps, 4), NumPut(1, dps, 8)
 
-	SplitPath, tcplug, , dir, , name
+	SplitPath, PluginPath, ,dir, ,name
 	name = %dir%\%name%.ini
 	DllCall("lstrcpyA", "uint", &dps+12, "uint", &name)
-	r := DllCall(tcplug "\ContentSetDefaultParams", "uint", &dps)	
+	r := DllCall(PluginPath "\ContentSetDefaultParams", "uint", &dps)
 }
+
+/* Group: About
+	o v2.0 by majkinetor. 
+	o TC Content Plugin Repository: <http://www.ghisler.com/plugins.htm#content> & <http://www.totalcmd.net/directory/content.html> 
+	o TC Content Plugin SDK: <http://ghisler.fileburst.com/content/contentpluginhelp2.0.zip>
+	o Licenced under GNU GPL <http://creativecommons.org/licenses/GPL/2.0/>.
+ */
