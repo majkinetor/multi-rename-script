@@ -646,7 +646,10 @@ DoRename(){
 	cnt := LV_GetCount(), res := 1, Progress(true)
 	loop, %cnt%
 	{
-		#flag := "real", #no := A_Index +  delRow - 1,  LV_GetText(oldPath, delRow, 3),  newName := Proc( oldPath )
+		#flag := "real", #no := A_Index +  delRow - 1,  LV_GetText(oldPath, delRow, 3)
+		
+		newName := Proc( oldPath )
+		
 		SplitPath, oldPath, ,dir
 		newPath := dir "\" newName
 
