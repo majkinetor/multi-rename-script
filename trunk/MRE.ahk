@@ -102,13 +102,13 @@ MREF_Case( Case ) {
 }
 
 ;==============================================================================================
-;		Mask1    "[C10+5:2]. [N4-] [E]
-;		Mask2	 bak			
-;		SR		"_" " "
-;		Case	Upper
-;		Mask	[N] ([=Hash.SHA1.lower])
-;       UDF		param1 param2 "param with space"
-;
+;		Mask1		"[C10+5:2]. [N4-] [E]"
+;		Mask2		bak
+;		Replace		"mislim dakle postoijm" " "
+;		Case		Upper
+;		Mask		"[N] ([=Hash.SHA1.lower])"
+;       UDF			"param1" "param2" "`"para `" mparam3`"" param4
+; 
 MRE_compile( MRS ) {
 	loop, parse, MRS, `n
 	{
