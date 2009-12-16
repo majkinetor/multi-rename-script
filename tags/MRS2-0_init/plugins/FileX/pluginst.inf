@@ -1,0 +1,5 @@
+[plugininstall]
+description=FileX 1.7
+type=wdx
+file=FileX.WDX
+defaultdir=FileX

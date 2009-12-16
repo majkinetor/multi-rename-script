@@ -1,0 +1,89 @@
+[Esp]
+FileType=Tipo de fichero
+Association=Asociaciуn
+DriveType=Tipo de disco
+DepthLevel=Nivel de profundidad
+OwnerName=Nombre de propietario
+OwnerDomain=Nombre completo del Equipo
+Ownertype=Tipo de propietario
+FullPathLen=Nє carбcteres de ruta+fichero
+FilenameLen=Nє carбcteres de fichero
+PathLen=Nє carбcteres de la ruta
+ExtLen=Nє carбcteres de la extensiуn
+Group=Grupo
+GroupN=Nє de Grupo
+EmptyDir=Directorio vacнo
+ZeroSizeDir=Tamaсo de directorio 0
+OwnerSID=Identificador de seguridad propio
+ShareName=Nombre en red del fich compartido
+ServerName=Nombre del servidor local
+ParentDir=Directorio
+GrandPaDir=Un directoio atrбs
+GtGrandPaDir=Dos directorios atrбs
+Extents=Бreas de almacenamiento
+ContentType=tipo de contenido
+
+Removable=Removible
+Fixed=Fijo
+Floppy=Disquete
+Network=Red de trabajo
+
+[Rus]
+FileType=Тип файла
+Association=Ассоциирован с
+DriveType=Тип диска
+DepthLevel=Глубина вложенности
+OwnerName=Имя владельца
+OwnerDomain=Рабочая группа владельца
+Ownertype=Тип владельца
+FullPathLen=Длина полного имени
+FilenameLen=Длина имени
+PathLen=Длина пути
+ExtLen=Длина расширения
+Group=Группа
+GroupN=Номер группы
+EmptyDir=Пустая папка
+ZeroSizeDir=Папка нулевого размера
+OwnerSID=SID владельца
+ShareName=Имя ресурса
+ServerName=Имя сервера
+ParentDir=В папке
+GrandPaDir=В подпапке
+GtGrandPaDir=В подпапке папки
+Extents=Фрагментов
+ContentType=Тип содержимого
+
+Removable=Сменный
+Fixed=Жёсткий
+Floppy=Дискета
+Network=Сетевой
+
+[DEU]
+FileType=Dateityp
+Association=Verknьpfung
+DriveType=Laufwerkstyp
+DepthLevel=Tiefenstufe
+OwnerName=Eigentьmername
+OwnerDomain=Eigentьmerdomain
+Ownertype=Eigentьmertyp
+FullPathLen=Gesamtpfadlдnge
+FilenameLen=Dateinamenlдnge
+PathLen=Pfadlдnge
+ExtLen=Dateierweiterungslдnge
+Group=Gruppe
+GroupN=Gruppennummer
+EmptyDir=leeres Verzeichnis
+ZeroSizeDir=0 Byte grosses Verzeichnis
+OwnerSID=Eigentьmer SID
+ShareName=Freigabename
+ServerName=Servername
+ParentDir=Vaterverzeichnis
+GrandPaDir=GroЯvaterverzeichnis
+GtGrandPaDir=UrgroЯvaterverzeichnis
+Extents=Erweiterungen
+ContentType=Inhaltstyp
+
+Removable=wechselbar
+Fixed=Fest
+Floppy=Diskette
+Network=Netzwerk

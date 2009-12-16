@@ -1,0 +1,8 @@
+[PluginInstall]
+Description=Content-plugin to calculate file checksums. List of hash algorithms supported by the plugin can be extended using second-level plugins.
+DescriptionRus = Content-плагин для вычисления контрольных сумм файлов с возможностью расширения списка поддерживаемых алгоритмов.
+Type=wdx
+File=wdhash.wdx
+DefaultDir=wdHash
+Readme=
+ReadmeRus=ReadMe.ru.txt

@@ -1,0 +1,6 @@
+[plugininstall]
+description=anytag 0.97 content plugin for displaying metadata of almost all audio files.
+type=wdx
+file=anytag.wdx
+defaultdir=wdx_anytag
+
