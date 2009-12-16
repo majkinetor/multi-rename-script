@@ -1,0 +1,6 @@
+[plugininstall]
+description=ShellDetails displays all Windows Explorer fields in Total Commander.
+descriptiondeu=ShellDetails zeigt alle Windows Explorer-Felder im Total Commander an.
+type=wdx
+file=ShellDetails.wdx
+defaultdir=ShellDetails
