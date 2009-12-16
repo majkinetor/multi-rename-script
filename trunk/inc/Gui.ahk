@@ -3,7 +3,7 @@ GuiCreate(){
 
 	Gui, +LastFound
 	hGui := WinExist()
-	Win_SetIcon(hGui, "res\icon.ico ", 1)
+	Win_SetIcon(hGui, "res\icon.ico", 1)
 
 	Gui, Margin, , 5
 
