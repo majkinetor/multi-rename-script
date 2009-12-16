@@ -1,4 +1,0 @@
-Mask("[C10+5:2]. [N4-] [=Hash.CRC32]")
-SR("_", " ") 
-Case("Upper") 
-Mask("backup [N] backup")

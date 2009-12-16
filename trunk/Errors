@@ -1,9 +1,0 @@
-;PARSING ERRORS
-;--------------------------------------------------
-
-ERR_OPENMASK=1          ;missing ]
-ERR_PLUG=2              ;plugin can't be found
-ERR_PLUGLOAD=3          ;error while opening plugin
-ERR_PLUGFIELD=4         ;no plugin filed or unit
-ERR_PLUGRANGE=6         ;invalid plugin range
-ERR_UNKNOWN=10          ;unknown error
