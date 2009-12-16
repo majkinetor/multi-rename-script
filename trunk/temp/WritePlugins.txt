@@ -1,0 +1,130 @@
+To write AHK plugin you must have basic knowledge of AutoHotKey programming language. If you never used it, check out AHK "quick start tutorial":QST.
+
+I will start from most trivial sample - plugin that returns the file size. Lets name this plugin @Size@
+
+In @\plugins@ folder there is ahk plugin template, file @myplugin@. You can use this file as a base for new MRS plugin. If you change extension of template file to @.ahk@ and reload MRS you can see that it immediately works if you click the _Plugins_ button. For the start go to @\plugins@ folder, and rename @MyPlugin@ file to @Size.ahk@ and open it in editor.
+
+Now use search & replace of your editor to construct valid subroutine names:
+
+bc. Search:  MyPlugin
+Replace: Size
+
+The preparation is done, now you must implement @Size@ subroutine. In the header of the file there is a list of global variables that MRS will fill before calling plugin's main subroutine. For instance, @#fn@ will contain file name, @#fd@ file's directory, etc. Subroutine must return result into the variable @#Res@.
+
+As we need file size, we need full file path, sent by MRS in @#fp@ variable. This is the complete plugin implementation:
+
+bc. Size:
+	FileGetSize, #Res, %#fp%, K
+return
+
+"FileGetSize":FGS is AutoHotKey function to get the file size. Above, we are saving file size in kilobytes into @#Res@ variable and return control to MRS.
+Now, save this file and restart MRS. "Size" should be in the list of the plugins. Type @[=Size]@ mask to verify that it works correctly. 
+
+This is pretty much everything that you need to know about AHK plugin: implement routine by the same name as plugin and return the data into the @#Res@ variable. There are some other things, but they are not mandatory. 
+
+<HR>
+
+Let me now extend this plugin so it can return file size in 3 formats: MB, KB and B. This is where you implement other subroutine which only purpose is to return the fields of the plugin separated by new line char (@`n@):
+
+bc. Size_GetFields:
+	#Res = MB`nKB`nB
+return
+
+Now user will be able to type @[=Size.MB]@ or @[=Size.KB]@ to get appropriate format or again just @[=Size]@ to stick with default format. This is also used to check parsing mask for errors by MRS, so @[=Size.GB]@ will be reported as error as @GB@ is not in the field list.
+
+Main plugin subroutine must now be changed to return data according to the requested field. MRS sends field to the plugin in @#1@ global variable. The complete code for new plugin is:
+
+bc. Size:
+   FileGetSize, #Res, %#fp%		;get the file size in bytes
+   if #1=MB
+	#Res /= 1048576.0
+   else if #1=KB
+	#Res /= 1024.0
+ 
+   If #tmp := InStr(#Res, ".")		;use 2 decimal digits
+	#Res := SubStr(#Res, 1, #tmp+2)
+return
+ 
+Size_GetFields:
+   #Res = MB`nKB`nB
+return
+
+You can test plugin fields by typing them or by clicking Size in Plugins menu which will bring the menu with available fields.
+
+<HR>
+
+Finally, lets check more complex example. To continue with file information, lets return size, version and attributes. Lets create new plugin that will serve all that data and call it @File@. Do the same thing as before to create @File.ahk@ and its subroutines. In @File_GetFields@, we will return string containing all fields we serve while Size field will also have 3 units:
+
+bc. File_GetFields:
+	#Res = 
+	(Ltrim
+	    Size|M|K|B
+	    Version
+	    Attributes
+	)
+return
+
+You specify units near the filed name by using | after the field name as separator. The above code is the same as writting	
+
+bc. #Res = Size|M|K|B`nVersion`nAttributes
+
+just more clear to read.
+
+MRS returns field in @#1@ and unit in @#2@ so you can get the job done like this:
+
+bc. File:
+	If (#1 = "Attributes") {
+		FileGetAttrib, #Res, %#fp%
+	} 
+	else if (#1 = "Version") {
+		FileGetVersion #Res, %#fp%
+	else { 
+		FileGetSize, #Res, %#fp%		;get the file size in KB
+		if #2=MB			
+			#Res /= 1048576
+		else if #2=KB
+			#Res /= 1024
+		If #tmp := InStr(#Res, ".")		;use 2 decimal digits
+			#Res := SubStr(#Res, 1, #tmp+2)
+	 }
+return
+
+<HR>
+
+h3. Remarks
+
+<UL>
+<LI>Plugin name must be valid AHK variable name. Fields and units can not contain . and | symbols.</LI>
+<LI> You can write into all globals that MRS sends you if you don't need them. There is 1 variable reserved for temporary storage, @#tmp@, but you can use all others (@#fn, #fd...@) if you don't need them. Other then that, all other variables you create MUST have prefix to avoid overwriting some of the MRS internal data. For instance, in above plugin, you can use File_attrib as plugin's internal variable. If you use large number of variables, consider closing the plugin into function:
+
+<PRE>File:
+	File()
+return
+ 
+File() {
+  local x, y, z, k
+  static i
+   
+  ...
+}</PRE>
+
+Functions in AHK offer local and static variables which are not seen outside the scope of the function and can not influence MRS internal variables.</LI>
+
+<LI> You can return * in GetFields to signify that plugin accepts anything as field name. This can be used to send arbitrary parameter to the plugin. For instance, CSV plugin returns data from appropriate columns from CSV file. To return Nth column, you write [=CSV.N]. That was possible by setting @#Res=*@ in @CSV_GetFields@ subroutine. Everything after initial dot up to the closing ] will be sent as @#1@.</LI>
+
+<LI> Try to make plugins as fast as possible so real time preview doesn't suffer. There is global variable #flag that will tell you how plugin is used - in preview or in real renaming. This is important for 2 reasons: if plugin requires more time to calculate data for file, like taking info from the Internet, it makes sense to disable preview and do actual job only when user presses Start button; second, some things can not be done without having information about complete list in which case plugin should definitely disable its work until real renaming has started. @#flag@ can take the following values: @p@ (preview) and @r@ (realtime) </LI>
+
+<LI> Visit "AutoHotKey forum":Forum, most notably "Scripts & Functions":SF for large set of community developed goodies that can be included in your script via @#include@ directive (like COM support, database and XPath functions, etc...). If you include 3th party scripts into your plugin, the best way is to create folder in \plugins with the same name as plugin and put includes there. For instance, Hash plugin uses "Hash function":HASH which uses "File":FILE library and includes it at as:
+<PRE>
+#include plugins\_Hash\File.ahk
+#include plugins\_Hash\Hash.ahk</PRE>
+</LI>
+</UL>
+
+
+[QST]http://www.autohotkey.com/docs/Tutorial.htm
+[FGS]http://www.autohotkey.com/docs/commands/FileGetSize.htm
+[Forum]http://www.autohotkey.com/forum/
+[SF]http://www.autohotkey.com/forum/forum-2.html
+[HASH]http://www.autohotkey.com/forum/topic23584.html
+[FILE]http://www.autohotkey.com/forum/topic19608.html

@@ -1,0 +1,42 @@
+h3. Basic Masks
+
+All masks except plugin names and fields are case sensitive. White space is allowed between mask name and its parameters.
+
+
+
+|_. mask|_. description|
+|(tab_section). File Name||
+|N n-m|From n to m, no m means "end", no n means "start"|
+|N n,m|From n, m.|
+|E n-m|Extension|
+|C s+i:w|Counter  S-start, i-increment, w-width|
+|P|Parent dir|
+|G|Grandparent dir|
+
+|. DateTime||
+|Y|Year in 4 digit form|
+|y|Year in 2 digit form|
+|M|Month, 2 digit|
+|D|Day, 2 digit|
+|t|Time, as defined in current country settings. : is replaced by a dot|
+|h|Hours, always in 24 hour 2 digit format|
+|m|Minutes, in 2 digit format|
+|s|Seconds, in 2 digit format|
+
+|\2. Case||
+|U|All characters after this position in uppercase|
+|L|All characters after this position in lowercase|
+|F|First letter of each word uppercase after this position, all others lowercase|
+|n|All characters after this position again as in original name (upper/lowercase unchanged)|
+
+|\2. Plugins||
+|=Plugin|/3. 3 ways to call plugins. Range can be specified with ":" using [N] notation: [=plugin:range]|
+|=Plugin.field||
+|=Plugin.field.unit||
+
+
+|\2. Special||
+|[|Opening square bracket|
+|]|Closing square bracket|
+
+http://hobix.com/textile/
