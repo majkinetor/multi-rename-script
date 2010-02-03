@@ -1,4 +1,4 @@
-;	mrs mod , submenus are signed with <> not with []
+﻿;	mrs mod , submenus are signed with <> not with []
 
 ;------------------------------------------------------------------------------------------------
 ; Function:		ShowMenu

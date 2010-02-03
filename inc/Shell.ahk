@@ -1,4 +1,4 @@
-Shell_Register() {
+﻿Shell_Register() {
 	global gShellName, gShellGuid
 
 	RegWrite, REG_SZ, HKCR, *\shell\%gShellName%\DropTarget, CLSID, %gShellGuid%

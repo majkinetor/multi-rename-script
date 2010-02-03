@@ -1,4 +1,4 @@
-; Title:		Plugins
+﻿; Title:		Plugins
 ;				*Plugin framework for non compiled scripts*
 
 ;------------------------------------------------------------------------

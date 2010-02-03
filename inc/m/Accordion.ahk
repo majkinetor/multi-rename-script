@@ -1,4 +1,4 @@
-;by majkinetor
+﻿;by majkinetor
 
 Accordion(title, topic, text, on=1, w=500, h="", x="", y=""){
 	static ht, fn
