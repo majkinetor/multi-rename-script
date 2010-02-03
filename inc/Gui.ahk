@@ -269,14 +269,13 @@ Progress_Inc(){
 ;			Subclassing procedure for list view to override scrolling and mouse wheel
 ;
 LvWindowProc(Hwnd, UMsg, WParam, LParam){ 		
-	static 
-;	n++
-;	outputdebug (%n%) HWND: %hwnd% ,Msg: %umsg% ,Wparam=%Wparam%, LParam=%Lparam%, %A_IsCritical%
-	if !adrCallWindowProcA
-		adrCallWindowProcA := DllCall("GetProcAddress", "Uint", DllCall("GetModuleHandle", "Str", "user32"), "Str", "CallWindowProcA")
+	static adrCallWindowProc
+
+	if !adrCallWindowProc
+		adrCallWindowProc := DllCall("GetProcAddress", "Uint", DllCall("GetModuleHandle", "str", "user32"), "astr", "CallWindowProcW")
 
 	if (uMsg = 277) || (uMsg = 522)		;WM_VSCROLL, WM_MOUSEWHEEL
 		SetTimer, DelayedPreview, -10		  ;spam protection: Preview() alone here tends to block computer, burning CPU, on scrolling, randomly.
 
-    return DllCall(adrCallWindowProcA, "UInt", A_EventInfo, "UInt", Hwnd, "UInt", UMsg, "UInt", WParam, "UInt", LParam, "Uint") 
+    return DllCall(adrCallWindowProc, "UInt", A_EventInfo, "UInt", Hwnd, "UInt", UMsg, "UInt", WParam, "UInt", LParam, "Uint") 
 }
