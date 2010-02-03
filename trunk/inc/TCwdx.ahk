@@ -1,4 +1,4 @@
-; Title:	TCwdx
+﻿; Title:	TCwdx
 ;			Functions to work with Total Commander content plugins
 
 
@@ -131,9 +131,11 @@ TCwdx_GetPluginFields( tcplug, format="" ) {
 
 	VarSetCapacity(name,512), VarSetCapacity(units,512)
 	loop {
-		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
+		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "UINT", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, break										;ft_nomorefields=0
 		VarSetCapacity(name,-1) , VarSetCapacity(units,-1)
+		Transform, name, FromCodePage, 0, %name%
+		Transform, units, FromCodePage, 0, %units%
 		IfEqual, r, 7, SetEnv, units								;multiple fields are not units
 
 		if format = 0
@@ -171,8 +173,8 @@ TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
 	static i=0, info, st
 	if (!i++)
 		VarSetCapacity(info,256), VarSetCapacity(st, 16)		;reserve buffers only on first call
-
 	type := DllCall(tcplug "\ContentGetValue", "str", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
+
 	if (type <=0 or type=9) 
 		return
 	goto TCwdx_Type_%type%
@@ -220,7 +222,8 @@ TCwdx_GetIndices(tcplug, field, ByRef fi, ByRef ui="."){
 		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, return										;ft_nomorefields=0
 		VarSetCapacity(name,-1)
-
+		Transform, name, FromCodePage, 0, %name%
+		Transform, units, FromCodePage, 0, %units%
 		if (name=field) {
 			fi := A_Index - 1
 			if (ui != ".") and (unit != "") {

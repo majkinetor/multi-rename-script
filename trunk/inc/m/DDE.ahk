@@ -1,4 +1,4 @@
-;By majkinetor
+﻿;By majkinetor
 
 /*
 DDE_Callback(nType, nFormat, hConv, hString1, hString2, hData, nData1, nData2)

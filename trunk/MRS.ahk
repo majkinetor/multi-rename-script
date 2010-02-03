@@ -1,4 +1,4 @@
-#include %A_ScriptDir%
+﻿#include %A_ScriptDir%
 #NoTrayIcon
 #SingleInstance, force
 #NoEnv
@@ -252,10 +252,11 @@ ProcCase( fn, case) {
 ParseMask( pMask, a ) {
 	local i, r, k, c, token, b, param, cnt, fun, fi, ui, re,	z := "a" a "_0",	 out, out1, out2, out3,		rng, rng1, rng2, rng3
 	%z% := 0 
+	
 	StringReplace, pMask, pMask, ]], >]							; replace [ ]] with [ >] for easier parsing 
 	loop {
 	;extract token
-		c := chr(*&pMask), b := 0
+		c := SubStr(pMask, 1, 1), b := 0
 		if ( c="[" AND  b := 1)									;b keeps branch that is executed (function=1, constant=0)
 			 if ( i := InStr(pMask, "]")) {						;check for ]]
 				token := SubStr(pMask, 2, i-2), pMask := SubStr(pMask, i+1)
@@ -319,7 +320,7 @@ ParseMask( pMask, a ) {
 							re = `aim)^\Q%out1%\E([|]|\s*$)
 							if (out2 != "") 
 								re = `aim)^\Q%out1%\E.*?[|]\Q%out2%\E([|]|\s*$)
-
+						
 							if !RegExMatch(#Res, re)
 								return ERR_PLUGFIELD
 						}
@@ -334,6 +335,7 @@ ParseMask( pMask, a ) {
 						return ERR_PLUGLOAD							
 
 					TCWdx_GetIndices(k, out3, fi, ui)
+
 					if (fi = "" or ui = "")					
 						return ERR_PLUGFIELD						
 	

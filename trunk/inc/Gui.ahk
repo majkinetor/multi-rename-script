@@ -1,4 +1,4 @@
-GuiCreate(){
+﻿GuiCreate(){
 	local tf, tw, th, header, footer
 
 	Gui, +LastFound

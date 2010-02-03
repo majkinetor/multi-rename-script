@@ -1,7 +1,7 @@
-; Title:		Ini
+ï»¿; Title:		Ini
 ;				*Set of functions for ini-like handling of strings*
 ;
-; 
+;Â 
 ;
 ;				This set of functions allows you to handle strings that comply to the ini section format. It makes ini section abstract, allowing
 ;				you to store query and change related information as a whole instead having to take care about big number of variables.
@@ -34,7 +34,7 @@
 ;
 Ini_LoadSection( pIniFile, pSection="", pPrefix="inis_") {
 	local sIni,v,v1,v2,j
-	static x = ",,, ,	,``,¬,¦,!,"",£,%,^,&,*,(,),=,+,{,},;,:,',~,,,<,.,>,/,\,|,-"
+	static x = ",,, ,	,``,Â¬,Â¦,!,"",Â£,%,^,&,*,(,),=,+,{,},;,:,',~,,,<,.,>,/,\,|,-"
 	
 	
  ;the fastest way to get single section
@@ -143,7 +143,7 @@ Ini_GetSectionNames(pIniFile) {
 ;
 Ini_LoadKeys(pIniFile, section="", pInfo=0, prefix="", filter="", reverse = false){
 	local s, p, v1, v2, res, at, l, re, f, fl
-	static x = ",,, ,	,``,¬,¦,!,"",£,%,^,&,*,(,),=,+,{,},;,:,',~,,,<,.,>,/,\,|,-"
+	static x = ",,, ,	,``,Â¬,Â¦,!,"",Â£,%,^,&,*,(,),=,+,{,},;,:,',~,,,<,.,>,/,\,|,-"
 	at = %A_AutoTrim% 
 	AutoTrim, On 
 

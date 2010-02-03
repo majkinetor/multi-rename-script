@@ -1,4 +1,4 @@
-;-------------------------------------------------------------------------- 
+﻿;-------------------------------------------------------------------------- 
 ; Function: CreateFont 
 ;			Creates font in memory which can be used with any API function accepting font handles. 
 ; 

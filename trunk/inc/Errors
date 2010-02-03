@@ -1,4 +1,4 @@
-;PARSING ERRORS
+﻿;PARSING ERRORS
 ;--------------------------------------------------
 
 ERR_OPENMASK=1          ;missing ]

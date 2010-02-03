@@ -1,4 +1,4 @@
-COM_Init(bOLE = False)
+﻿COM_Init(bOLE = False)
 {
 	Return	bOLE ? COM_OleInitialize() : COM_CoInitialize()
 }

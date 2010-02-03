@@ -1,4 +1,4 @@
-OnButton( ctrl ) {
+﻿OnButton( ctrl ) {
 	global 
 
 	if ctrl = btnStart
