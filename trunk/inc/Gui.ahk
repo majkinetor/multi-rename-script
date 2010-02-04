@@ -1,7 +1,7 @@
 ﻿GuiCreate(){
 	local tf, tw, th, header, footer
 
-	Gui, +LastFound
+	Gui, +LastFound +Resize +MinSize%gGuiWidth%x300
 	hGui := WinExist()
 	Win_SetIcon(hGui, "res\icon.ico", 1)
 
@@ -39,7 +39,7 @@
   ;expansion
 	tw := gGuiWidth // 2 -5 
 	Gui, Font, , Webdings
-	Gui, Add, Button, vbtnExpand x%tw% y+3 h12 w15 g_OnButton, 6
+	Gui, Add, Button, vbtnExpand HWNDhbtnExpand x%tw% y+3 h12 w15 g_OnButton, 6
 	Gui, Font, ,
 
 	Gui, Add, Tab ,section x5 w0 h0 y+0 vtabExpand, expand0|expand1
@@ -56,17 +56,17 @@
 
   ;footer
 	Gui, Add, GroupBox, section h0
-	Gui, Add, Button, 0x8000 xs ys w80 h20  g_OnButton vbtnStart, &Start
-	Gui, Add, Button, 0x8000 yp x+5 w80 h20 g_OnButton vbtnUndo, &Undo
+	Gui, Add, Button, 0x8000 xs ys w80 h20  g_OnButton vbtnStart HWNDhbtnStart, &Start
+	Gui, Add, Button, 0x8000 yp x+5 w80 h20 g_OnButton vbtnUndo HWNDhbtnUndo, &Undo
 	th := gGuiWidth - 340		
 	Gui, Font, ,Webdings
-	Gui, Add, Button, 0x8000 h20 xm+200 yp  h20 g_OnButton vbtnReload, q
+	Gui, Add, Button, 0x8000 h20 xm+200 yp  h20 g_OnButton vbtnReload HWNDhbtnReload, q
 	Gui, Font, ,
-	Gui, Add, Button, 0x8000 h20 x+10 yp h20 g_OnButton vbtnResult, Result &List
-	Gui, Add, Button, 0x8000 h20 x+30 yp h20 g_OnButton vbtnInEditor, Preview in &Editor
+	Gui, Add, Button, 0x8000 h20 x+10 yp h20 g_OnButton HWNDhbtnResult vbtnResult, Result &List
+	Gui, Add, Button, 0x8000 h20 x+30 yp h20 g_OnButton HWNDhbtnInEditor vbtnInEditor, Preview in &Editor
 
 	Gui, Font,,	Verdana
-	Gui, Add, Text, 0x8000 h20 x+70 w150 yp+4 h20  vtxtStatus,
+	Gui, Add, Text, 0x8000 h20 x+70 w150 yp+4 h20  HWNDhStatus vtxtStatus,
 	Gui, Add, Progress, 0x8000 h20 xp w150 yp-4 h20 border vProgress hidden
 
   ;combos
@@ -80,7 +80,21 @@
 	Gui, Submit, NoHide
 
   ;hyperlinks
-	HLink_Add(hGui, gGuiWidth - 20,  gGuiHeight - 22,  30, 18, "OnHLink", "<a href=""?"">?</a>" )
+	hlink := HLink_Add(hGui, gGuiWidth - 20,  gGuiHeight - 22,  30, 18, "OnHLink", "<a href=""?"">?</a>" )
+}
+
+GuiAttach() {
+	global 
+
+  	Attach(hlvFiles,	"w h")
+	Attach(hbtnExpand,	"x.5")
+	Attach(hbtnStart,	"y")
+	Attach(hbtnUndo,	"y")
+	Attach(hbtnReload,	"y")
+	Attach(hbtnResult,	"y")
+	Attach(hbtnInEditor,"y")
+	Attach(hStatus,		"y")
+	Attach(hlink,		"x y")
 }
 
 ;-------------------------------------------------------------------------------------
@@ -99,12 +113,13 @@ GuiCreateExpansion() {
 	Gui, Font, ,Verdana
 	Gui, Add, DropDownList, x+10 yp w170 HWNDhddPresets vddPresets g_OnPreset sort,
 	Gui, Font,
-	Gui, Add, Button, x+2 h20 0x8000 g_OnPresetSave,save
+	Gui, Add, Button, x+2 hp 0x8000 g_OnPresetSave,save
 }
 
 ;-------------------------------------------------------------------------------------
 
 GuiExpand() {
+
 	local y, h, d
 	static size=45
 
@@ -118,6 +133,9 @@ GuiExpand() {
 
 	y += size*d, h -= size*d
 	ControlMove, ,,y, ,h, ahk_id %hlvFiles%
+	ControlMove, ,,y-8,,, ahk_id %hbtnExpand%
+
+	Attach()
 }
 
 

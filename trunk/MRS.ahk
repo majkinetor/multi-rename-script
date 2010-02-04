@@ -8,7 +8,7 @@ SetWorkingDir, %A_ScriptDir%
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
-	gVersion	:= "1.1"
+	gVersion	:= "1.2"
 	gGuiHeight	:= 500,  gGuiWidth	:= 800
 	gResultList	:= "res\ResultList.txt"
 	gPreviewFile:= "res\Preview.txt"
@@ -18,7 +18,7 @@ SetWorkingDir, %A_ScriptDir%
 	gDocsFolder	:= "docs"
 	;------------------------------------
 	
-	InitApp(), GuiCreate(), GuiInit(), Shell_Init("OnShell")
+	InitApp(), GuiCreate(), GuiInit(), GuiAttach(), Shell_Init("OnShell")
 
 	if (gCmdPreset != "")
 		goto DoCmdRun
@@ -32,12 +32,11 @@ return
 
 
 a() {
-  return A_IsUnicode ? "a" : ""
+	return A_IsUnicode ? "a" : ""
 }
 
 Tr( ByRef var ) {
-	if A_IsUnicode
-		Transform, var, FromCodePage, 0, %var%
+	;Transform, var, FromCodePage, 0, %var%
 }
 
 ;-------------------------------------------------------------------------------------
@@ -877,10 +876,9 @@ About(){
 		(LTrim
 		[About]
 		*%gTitle% %gVersion%* 
-
-
 		_by majkinetor_
-		!http://www.autohotkey.net/~majkinetor/-Avatars/monkey_smoking.gif!
+
+		!http://www.autohotkey.net/~majkinetor/-Avatars/scaryroboo3k.gif!
 		[Web]
 		"Total Commander Content Plugins":http://www.totalcmd.net/directory/content.html
 		"AutoHotKey":http://www.autohotkey.com
@@ -895,7 +893,7 @@ About(){
 		"Ini":http://www.autohotkey.com/forum/topic22495.html - Helper functions for easier ini file handling
 		"Plugins":http://www.autohotkey.com/forum/topic22029.html - Plugin framework for non compiled scripts
 		"ShowHTMLDialog":http://www.autohotkey.com/forum/topic24429.html - Show HTML dialog
-
+		"Attach":http://www.autohotkey.com/forum/topic48298.html - Attach controls in the window.
 
 		[Shortcuts]
 		@F12@	- Load default preset
@@ -939,3 +937,4 @@ return
 #include inc\m\ShowMenu.ahk
 #include inc\m\Accordion.ahk
 #include inc\m\Win.ahk
+#include inc\m\Attach.ahk
