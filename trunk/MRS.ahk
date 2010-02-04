@@ -23,7 +23,7 @@ SetWorkingDir, %A_ScriptDir%
 	if (gCmdPreset != "")
 		goto DoCmdRun
 	
-	Gui, show, h%gGuiHeight% w%gGuiWidth% Hide, %gTitle%
+	Gui, Show, h%gGuiHeight% w%gGuiWidth%, %gTitle%
 	Win_Recall("< -Min", "", gConfig)
  
 	if (cfg_LastEdit != "") && !cfg_NoLastEdit
