@@ -18,7 +18,6 @@ SetWorkingDir, %A_ScriptDir%
 	gDocsFolder	:= "docs"
 	;------------------------------------
 	
-	
 	InitApp(), GuiCreate(), GuiInit(), Shell_Init("OnShell")
 
 	if (gCmdPreset != "")
@@ -30,6 +29,16 @@ SetWorkingDir, %A_ScriptDir%
 		 Preset_Set(cfg_LastEdit, false) 
 	else Preset_Set("[N]>[E]", false) 
 return
+
+
+a() {
+  return A_IsUnicode ? "a" : ""
+}
+
+Tr( ByRef var ) {
+	if A_IsUnicode
+		Transform, var, FromCodePage, 0, %var%
+}
 
 ;-------------------------------------------------------------------------------------
 ;If 2 arguments are specified on cmd line - file list & preset - don't show GUI initialy, 
