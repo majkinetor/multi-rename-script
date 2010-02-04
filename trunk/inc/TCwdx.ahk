@@ -133,9 +133,10 @@ TCwdx_GetPluginFields( tcplug, format="" ) {
 	loop {
 		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "UINT", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, break										;ft_nomorefields=0
+
 		VarSetCapacity(name,-1) , VarSetCapacity(units,-1)
-		Transform, name, FromCodePage, 0, %name%
-		Transform, units, FromCodePage, 0, %units%
+		Tr(name), Tr(units)
+
 		IfEqual, r, 7, SetEnv, units								;multiple fields are not units
 
 		if format = 0
@@ -171,9 +172,10 @@ TCwdx_GetPluginFields( tcplug, format="" ) {
 ;
 TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
 	static i=0, info, st
+
 	if (!i++)
 		VarSetCapacity(info,256), VarSetCapacity(st, 16)		;reserve buffers only on first call
-	type := DllCall(tcplug "\ContentGetValue", "str", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
+	type := DllCall(tcplug "\ContentGetValue", a() "str", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
 
 	if (type <=0 or type=9) 
 		return
@@ -193,6 +195,7 @@ TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
 	TCWdx_Type_7:
 	TCwdx_Type_8:
 		VarSetCapacity(info,-1)						;ft_string
+		Tr(info)
 		return info
 	TCwdx_Type_10:									;A timestamp of type FILETIME, as returned e.g. by FindFirstFile(). It is a 64-bit value representing the number of 100-nanosecond.
 		r := DllCall("FileTimeToSystemTime", "uint", &info, "uint", &st)
@@ -221,9 +224,10 @@ TCwdx_GetIndices(tcplug, field, ByRef fi, ByRef ui="."){
 	loop {
 		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, return										;ft_nomorefields=0
-		VarSetCapacity(name,-1)
-		Transform, name, FromCodePage, 0, %name%
-		Transform, units, FromCodePage, 0, %units%
+
+		VarSetCapacity(name,-1), VarSetCapacity(units,-1)
+		Tr(name), Tr(units)
+
 		if (name=field) {
 			fi := A_Index - 1
 			if (ui != ".") and (unit != "") {
