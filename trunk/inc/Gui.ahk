@@ -272,7 +272,7 @@ LvWindowProc(Hwnd, UMsg, WParam, LParam){
 	static adrCallWindowProc
 
 	if !adrCallWindowProc
-		adrCallWindowProc := DllCall("GetProcAddress", "Uint", DllCall("GetModuleHandle", "str", "user32"), "astr", "CallWindowProcW")
+		adrCallWindowProc := DllCall("GetProcAddress", "Uint", DllCall("GetModuleHandle", "str", "user32"), a() "str", "CallWindowProcA")	;it works OK with A in both versions.
 
 	if (uMsg = 277) || (uMsg = 522)		;WM_VSCROLL, WM_MOUSEWHEEL
 		SetTimer, DelayedPreview, -10		  ;spam protection: Preview() alone here tends to block computer, burning CPU, on scrolling, randomly.
