@@ -109,11 +109,9 @@ GuiCreateExpansion() {
 	Gui, Add, Button, x+5   0x8000 h25 w90 g_OnExpButton vbExpPlugins,	&Plugins
 	Gui, Add, Button, x+5   0x8000 h25 w90 g_OnExpButton vbExpCase,		aA
 
+	Gui, Add, ComboBox, x+10 yp w200 HWNDhddPresets vddPresets g_OnPreset sort,
 
-	Gui, Font, ,Verdana
-	Gui, Add, DropDownList, x+10 yp w170 HWNDhddPresets vddPresets g_OnPreset sort,
-	Gui, Font,
-	Gui, Add, Button, x+2 hp 0x8000 g_OnPresetSave,save
+;	Gui, Add, Button, x+2 hp 0x8000 g_OnPresetSave,save
 }
 
 ;-------------------------------------------------------------------------------------
