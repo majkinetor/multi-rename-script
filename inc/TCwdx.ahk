@@ -111,10 +111,10 @@ TCwdx_UnloadPlugin(htcplug){
 
 ;-----------------------------------------------------------------
 ; Function: GetPluginFields
-;			Get list of plugin fields
+;			Get list of plugin fields.
 ;
 ; Parameters:
-;			tcplug	-	Path to TC content plugin
+;			tcplug	-	Path to TC content plugin.
 ;			format	-	If omited, only field names will be returned, if set to "ini" string will be in Ini_ format, field=index|unit1|unit2...|unitN
 ;						or field=index if there is no unit for given field, if "menu", string will be in ShowMenu format with "|" as item separator and root 
 ;						of the menu named "tcFields".
