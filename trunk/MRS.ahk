@@ -36,7 +36,7 @@ a() {
 }
 
 Tr( ByRef var ) {
-	;Transform, var, FromCodePage, 0, %var%
+	Transform, var, FromCodePage, 0, %var%
 }
 
 ;-------------------------------------------------------------------------------------

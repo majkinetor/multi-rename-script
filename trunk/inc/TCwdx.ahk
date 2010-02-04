@@ -256,6 +256,6 @@ TCwdx_SetDefaultParams(tcplug){
 
 	SplitPath, tcplug, , dir, , name
 	name = %dir%\%name%.ini
-	DllCall("lstrcpyA", "uint", &dps+12, "uint", &name)
+	DllCall("lstrcpyA", "uint", &dps+12, a() "str", name)
 	r := DllCall(tcplug "\ContentSetDefaultParams", "uint", &dps)	
 }
