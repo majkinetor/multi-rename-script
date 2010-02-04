@@ -575,7 +575,7 @@ Preset_Delete(name="") {
 		if focus != ddPresets
 			return
 	}
-
+	
 	ControlGet, i, FindString, %name%, ,ahk_id %hddPresets%
 	Control,  Delete, %i%, , ahk_id %hddPresets%
 
@@ -922,18 +922,25 @@ About(){
 #IfWinActive Multi-Rename Script
 
 F12:: Preset_Set("[N]>[E]>>>0>1", false)	;reset
-^A:: LV_Modify(0, "Select")
+~^A:: 
+	GuiControlGet, focus, FOCUSV
+	if focus != lvFiles 
+		return
+	LV_Modify(0, "Select")
+return
 
 ~del:: 
 	GuiControlGet, focus, FOCUSV
-	if focus != ddPresets
+	if (focus != "ddPresets")
 		return
 
 	GuiControlGet,name,,ddPresets
+	if !Preset_Exists( name )
+		return
 
 	MsgBox, 4, Preset, Delete preset ?`n`n%name%
 	ifMsgbox, Yes
-		Preset_Delete()
+		Preset_Delete( name )
 return
 
 ENTER::
