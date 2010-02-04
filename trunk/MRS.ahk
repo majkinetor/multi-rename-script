@@ -472,9 +472,7 @@ SetCtrlHandler( state ) {
 ;			Preset_Set("[N]>[E].bak", false)	;use first param as preset definition	
 ;
 Preset_Set( preset, flag=true ) {
-
 	p := flag ? Preset_GetDef(preset) : preset
-	
 	StringSplit, x, p, >
 
 	SetCtrlHandler( false )						;desable handler so OnProcChange isn't called 6 times
@@ -487,6 +485,16 @@ Preset_Set( preset, flag=true ) {
 	SetCtrlHandler( true )
 
 	gosub OnProcChange
+}
+
+
+;-------------------------------------------------------------------------------------
+; Function: Preset_Exists
+;			Check if preset exists
+Preset_Exists( name ) {
+	local s
+	s := Ini_LoadSection( gConfig, "Presets") 
+	return RegExMatch(s, "`amiS)^name[0-9]+=\Q" name "\E$")
 }
 
 ;-------------------------------------------------------------------------------------
@@ -511,9 +519,7 @@ Preset_Save() {
 	local name, def, idx, sec
 	Gui, submit, nohide
 
-	InputBox, name, Save preset, Name your preset,,200,120
-	if Errorlevel
-		return
+	GuiControlGet,name,,ddPresets
 	name = %name%			;trim
 
 	sec := Ini_LoadSection(gConfig, "Presets")
@@ -537,6 +543,7 @@ Preset_Save() {
 	IniWrite, %name%, %gConfig%, Presets, name%idx%
 	IniWrite, %def%, %gConfig%, Presets, def%idx%
 
+	MsgBox Preset saved: `n`n%name%
 }
 ;-------------------------------------------------------------------------------------
 ; Function: Preset_GetDef
@@ -900,7 +907,8 @@ About(){
 
 		[Shortcuts]
 		@F12@	- Load default preset
-		@DEL@ - Delete preset if Presets combo box is focused
+		@DEL@   - Delete current preset if presets combo box is focused
+		@ENTER@ - Save preset if presets combo box is focused
 		@SHIFT click@ - Select left column of ComboX
 		@ALT click@  - Select right column of ComboX
 
@@ -913,10 +921,27 @@ About(){
 ;-------------------------------------------------------------------------------------
 #IfWinActive Multi-Rename Script
 
-~del:: Preset_Delete()
 F12:: Preset_Set("[N]>[E]>>>0>1", false)	;reset
-F5:: Preview()
 ^A:: LV_Modify(0, "Select")
+
+~del:: 
+	GuiControlGet, focus, FOCUSV
+	if focus != ddPresets
+		return
+
+	GuiControlGet,name,,ddPresets
+
+	MsgBox, 4, Preset, Delete preset ?`n`n%name%
+	ifMsgbox, Yes
+		Preset_Delete()
+return
+
+ENTER::
+	GuiControlGet, focus, FOCUSV
+	if focus != ddPresets
+		return
+
+	Preset_Save()
 return
 
 #IfWinActive

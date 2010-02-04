@@ -348,15 +348,12 @@ return
 
 _OnPreset:
 	GuiControlGet,#tmp,,ddPresets
-	Preset_Set(#tmp)
+	if Preset_Exists(#tmp)
+		Preset_Set(#tmp)
 return 
 
 _OnButton:
 	OnButton( A_GuiControl )
-return
-
-_OnPresetSave:
-	Preset_Save()
 return
 
 _OnExpButton:
