@@ -630,45 +630,48 @@ DoReload(){
 	Preview()
 }
 
-;-------------------------------------------------------------------------------------
-; Function: DoRename
-;			Rename files using current processor
-DoRename(){
-	local newName, oldPath, newPath, dir, cnt, res, delRow := 1, flags := 0
+; Function: DoRename 
+;         Rename files using current processor 
+DoRename(){ 
+   local newName, oldPath, newPath, dir, cnt, res, delRow := 1, flags := 0, dire,ext,name_no_ext 
 
-	if (gParseError) 	{	
-		MsgBox Mask Error.
-		return
-	}
+   if (gParseError)    {    
+      MsgBox Mask Error. 
+      return 
+   } 
 
-	SetWorking( true )
+   SetWorking( true ) 
 
-	FileDelete, %gResultList%
+   FileDelete, %gResultList% 
 
-	Gui, ListView, lvFiles
-	GuiControl, -Redraw, lvFiles
-	cnt := LV_GetCount(), res := 1, Progress(true)
-	loop, %cnt%
-	{
-		#flag := "real", #no := A_Index +  delRow - 1,  LV_GetText(oldPath, delRow, 3),  newName := Proc( oldPath )
-		SplitPath, oldPath, ,dir
-		newPath := dir "\" newName
+   Gui, ListView, lvFiles 
+   GuiControl, -Redraw, lvFiles 
+   cnt := LV_GetCount(), res := 1, Progress(true) 
+   loop, %cnt% 
+   { 
+      #flag := "real", #no := A_Index +  delRow - 1,  LV_GetText(oldPath, delRow, 3),  newName := Proc( oldPath ) 
+      SplitPath, oldPath, ,dir 
+      newPath := dir "\" newName 
 
-		res := DllCall("MoveFileEx", "str", oldPath, "str", newpath, "uint", flags)
-		if !res 
-			LV_Modify(delRow, "col5", ErrMsg() ), delRow++
-		else {
-			LV_Delete(delRow)
-			FileAppend, "%oldPath%" -> "%newName%"`r`n, %gResultList%
-		}
+      SplitPath, newPath, ,dir 
+      IfNotExist, %dir% 
+			FileCreateDir, %dir% 
 
-		Progress_Inc()
-		if !mod(A_Index, 10)			;do win messages
-			sleep, -1
-	}
-	Progress(false)
-	GuiControl, +Redraw, lvFiles 
-	SetWorking( false ), Preview()		;call preview in case of errors
+      res := DllCall("MoveFileEx", "str", oldPath, "str", newpath, "uint", flags) 
+      if !res 
+         LV_Modify(delRow, "col5", ErrMsg() ), delRow++ 
+      else { 
+         LV_Delete(delRow) 
+         FileAppend, "%oldPath%" -> "%newName%"`r`n, %gResultList% 
+      } 
+
+      Progress_Inc() 
+      if !mod(A_Index, 10)         ;do win messages 
+         sleep, -1 
+   } 
+   Progress(false) 
+   GuiControl, +Redraw, lvFiles 
+   SetWorking( false ), Preview()      ;call preview in case of errors 
 }
 
 ;-------------------------------------------------------------------------------------
