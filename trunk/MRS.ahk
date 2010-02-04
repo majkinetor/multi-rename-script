@@ -22,8 +22,9 @@ SetWorkingDir, %A_ScriptDir%
 
 	if (gCmdPreset != "")
 		goto DoCmdRun
-
-	Gui, show, h%gGuiHeight% w%gGuiWidth%, %gTitle%
+	
+	Gui, show, h%gGuiHeight% w%gGuiWidth% Hide, %gTitle%
+	Win_Recall("< -Min", "", gConfig)
  
 	if (cfg_LastEdit != "") && !cfg_NoLastEdit
 		 Preset_Set(cfg_LastEdit, false) 
@@ -493,8 +494,9 @@ Preset_Set( preset, flag=true ) {
 ;			Check if preset exists
 Preset_Exists( name ) {
 	local s
+
 	s := Ini_LoadSection( gConfig, "Presets") 
-	return RegExMatch(s, "`amiS)^name[0-9]+=\Q" name "\E$")
+	return  RegExMatch(s, "`amiS)^name[0-9]+=\Q" name "\E$")
 }
 
 ;-------------------------------------------------------------------------------------
@@ -557,6 +559,7 @@ Preset_GetDef( name, idx=false ) {
 	global gConfig
 
 	sec := Ini_LoadSection(gConfig, "Presets")
+
 	if !RegExMatch(sec, "`aim)^\s*name(\d+)\s*=\Q" name "\E$", out)
 		return
 	return idx ? out1 : Ini_GetVal(sec, "def" out1)
