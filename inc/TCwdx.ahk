@@ -131,9 +131,8 @@ TCwdx_GetPluginFields( tcplug, format="" ) {
 
 	VarSetCapacity(name,512), VarSetCapacity(units,512)
 	loop {
-		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "UINT", &name, "uint", &units, "uint", 512)
+		r := DllCall(tcplug "\ContentGetSupportedField", "int", A_Index-1, "uint", &name, "uint", &units, "uint", 512)
 		IfEqual, r, 0, break										;ft_nomorefields=0
-
 		VarSetCapacity(name,-1) , VarSetCapacity(units,-1)
 		Tr(name), Tr(units)
 

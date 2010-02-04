@@ -1,6 +1,6 @@
 
   ------------------------------------------------------------------------
-   About anytag.wdx 0.97
+   About anytag.wdx 0.98
   ------------------------------------------------------------------------
 
     anytag.wdx is a content plugin for Total Commander which displays
@@ -97,6 +97,22 @@
    Version History
   ------------------------------------------------------------------------
 
+    29.09.07 Release anytag.wdx 0.98
+    28.09.07   Fixed: plugin occasionally crashed under Window Vista.
+    21.09.07   Added: scripting fuction $ord(x).
+    30.08.07   Added: support for iTunes SHOW field at MP4.
+    30.08.07   Added: support for iTunes sorting fields at MP4 (ALBUMSORTORDER, BANDSORTORDER, COMPOSERSORTORDER, PERFORMERSORTORDER, SHOWSORTORDER, and TITLESORTORDER).
+    30.08.07   Added: support for iTunes sorting fields at ID3v2.2, ID3v2.3, and ID3v2.4 (ALBUMSORTORDER, BANDSORTORDER, COMPOSERSORTORDER, PERFORMERSORTORDER, and TITLESORTORDER).
+    20.08.07   Added: support for ID3v2.4 TSST frame (SETSUBTITLE).
+    19.08.07   Changed: field ORGANIZATION is mapped to PUBLISHER at Vorbis Comments now.
+    05.08.07   Fixed: function $len(...) omitted everything after first comma.
+    24.03.07   Added: field RATING WMP for ID3v2 and WMA tags.
+    01.03.07   Fixed: $left, $right and $mid were missing some range checks.
+    16.01.07   Added: support for iTunes gapless field at MP4 files.
+    16.01.07   Added: support for AacGain undo field at MP4 files.
+    19.09.06   Added: support for ID3v2 frame TDEN (ENCODINGTIME).
+    24.08.06   Added: scripting fuctions $regexp for replacing with regular expressions.
+    
     05.06.06 Release anytag.wdx 0.97
     05.06.06   Added: full support for ID3v2.4 tags.
     10.01.06   Changed: further caching improvements.
@@ -138,7 +154,7 @@
    License
   ------------------------------------------------------------------------
   
-    anytag.wdx - Copyright ©2004-2006 Florian Heidenreich
+    anytag.wdx - Copyright ©2004-2007 Florian Heidenreich
 
     anytag.wdx is designed for private use and commercial use without sale
     ("Freeware"), if the following rules are respected:
