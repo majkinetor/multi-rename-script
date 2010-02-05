@@ -9,5 +9,4 @@ v1.2
 
 
 Bugs:
-- IniWrite in GuiExit() doesn't work with Unicode.
 - ShellExtension stopped working.
