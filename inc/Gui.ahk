@@ -67,7 +67,7 @@
 
 	Gui, Font,,	Verdana
 	Gui, Add, Text, 0x8000 h20 x+70 w150 yp+4 h20  HWNDhStatus vtxtStatus,
-	Gui, Add, Progress, 0x8000 h20 xp w150 yp-4 h20 border vProgress hidden
+	Gui, Add, Progress, 0x8000 h20 xp w150 yp-4 h20 border HWNDhProgress vProgress hidden
 
   ;combos
 	Gui, Add, ListView, vcxMask HWNDhcxMask xm ym+40 w295 r10  -Hdr -Multi altsubmit, FN|Ext
@@ -83,9 +83,14 @@
 	hlink := HLink_Add(hGui, gGuiWidth - 20,  gGuiHeight - 22,  30, 18, "OnHLink", "<a href=""?"">?</a>" )
 }
 
+GuiSize:
+	SetTimer, DelayedPreview, -50
+return
+
 GuiAttach() {
 	global 
 
+	Attach("OnAttach")
   	Attach(hlvFiles,	"w h")
 	Attach(hbtnExpand,	"x.5")
 	Attach(hbtnStart,	"y")
@@ -93,7 +98,8 @@ GuiAttach() {
 	Attach(hbtnReload,	"y")
 	Attach(hbtnResult,	"y")
 	Attach(hbtnInEditor,"y")
-	Attach(hStatus,		"y")
+	Attach(hStatus,		"y w")
+	Attach(hProgress,	"y w")
 	Attach(hlink,		"x y")
 }
 
@@ -140,7 +146,6 @@ GuiExpand() {
 ;-------------------------------------------------------------------------------------
 GuiInit() {
 	local lw
-	static LVM_GETCOUNTPERPAGE=0x1028
 
 	Gui, ListView, lvFiles
 
@@ -149,10 +154,6 @@ GuiInit() {
 	LV_ModifyCol(1, lw//2), LV_ModifyCol(2, lw//2 " NoSort"), LV_ModifyCol(3, 200),  LV_ModifyCol(4, "NoSort")
 	if cfg_HideHScroll
 		HideHScroll( hlvFiles )
-
- ;determine page
-	SendMessage, LVM_GETCOUNTPERPAGE, 0, 0, , ahk_id %hlvFiles%
-	gLvPage := ErrorLevel
 
  ;set up combos
 	MRU_Load("FM"), MRU_Load("SR"), Preset_Load()
