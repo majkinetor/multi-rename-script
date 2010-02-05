@@ -84,7 +84,7 @@
 }
 
 GuiSize:
-	SetTimer, DelayedPreview, -50
+	SetTimer, DelayedPreview, -10
 return
 
 GuiAttach() {
