@@ -174,7 +174,7 @@ TCwdx_GetField(FileName, tcplug, fi=0, ui=0){
 
 	if (!i++)
 		VarSetCapacity(info,256), VarSetCapacity(st, 16)		;reserve buffers only on first call
-	type := DllCall(tcplug "\ContentGetValue", a() "str", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
+	type := DllCall(tcplug "\ContentGetValue", "astr", FileName, "int", fi, "int", ui, "uint", &info, "int", 256, "int", 0)
 
 	if (type <=0 or type=9) 
 		return
@@ -256,6 +256,6 @@ TCwdx_SetDefaultParams(tcplug){
 
 	SplitPath, tcplug, , dir, , name
 	name = %dir%\%name%.ini
-	DllCall("lstrcpyA", "uint", &dps+12, a() "str", name)
+	DllCall("lstrcpyA", "uint", &dps+12, "astr", name)
 	r := DllCall(tcplug "\ContentSetDefaultParams", "uint", &dps)	
 }
