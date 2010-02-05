@@ -1,0 +1,13 @@
+v1.2
+-----
++ Unicode support. Total Commander plugins are still not unicode (because mostly still don't support it). AHK plugins are Unicode.
++ Resizable window (window placement is saved in ini)
++ Rename operation will create directory if it doesn't exist (thx __meta__)
+* Preset Save button and DropDown replaced with single editable ComboBox.
+  To save preset write its desired name and press ENTER.
+  To load preset select it from the list or type its name.
+
+
+Bugs:
+- IniWrite in GuiExit() doesn't work with Unicode.
+- ShellExtension stopped working.
