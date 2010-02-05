@@ -5,6 +5,7 @@
 #MaxThreads, 255
 SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
+FileEncoding, UTF-8
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
