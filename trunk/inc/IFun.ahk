@@ -79,7 +79,7 @@ C:
 	#Res := (#no-1)+#1 + (#no-1)*#2
 
 	if (#tmp := #3-StrLen(#Res)) > 0
-		VarSetCapacity(C_w, #tmp, 48),  NumPut(0, &C_W+#tmp, "Char"),  VarSetCapacity(C_W, -1),  #Res := C_w #Res
+		#Res := SubStr("00000000000000000000000000000000000000000000000000", 1, #tmp) #Res
 return
 
 ;------------------------------------------------------------------------------

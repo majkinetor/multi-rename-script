@@ -416,7 +416,7 @@ ParseSR() {
 ;			again until ProcId changes.
 Preview(){
 		local topIndex, page, fpath, cnt, procid, pid, fid
-		static 	LVM_GETTOPINDEX=0x1027, funcID=0
+		static 	LVM_GETTOPINDEX=0x1027, LVM_GETCOUNTPERPAGE=0x1028, funcID=0
 
 		IfEqual, gFiles, , return
 
@@ -425,6 +425,9 @@ Preview(){
 
 		SendMessage, LVM_GETTOPINDEX, 0, 0, ,ahk_id  %hlvFiles%
 		topIndex := ErrorLevel
+
+		SendMessage, LVM_GETCOUNTPERPAGE, 0, 0, , ahk_id %hlvFiles%
+		gLvPage := ErrorLevel
 
 		cnt := LV_GetCount()
 		loop, % gLvPage+1
