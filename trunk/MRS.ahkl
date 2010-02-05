@@ -5,7 +5,7 @@
 #MaxThreads, 255
 SetBatchLines, -1
 SetWorkingDir, %A_ScriptDir%
-FileEncoding, UTF-8
+FileEncoding, UTF-16
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
@@ -24,7 +24,7 @@ FileEncoding, UTF-8
 	if (gCmdPreset != "")
 		goto DoCmdRun
 	
-	Gui, show, h%gGuiHeight% w%gGuiWidth%, %gTitle%
+	Gui, Show, h%gGuiHeight% w%gGuiWidth%, %gTitle%
 	Win_Recall("< -Min", "", gConfig)
  
 	if (cfg_LastEdit != "") && !cfg_NoLastEdit
@@ -417,7 +417,7 @@ ParseSR() {
 ;			again until ProcId changes.
 Preview(){
 		local topIndex, page, fpath, cnt, procid, pid, fid
-		static 	LVM_GETTOPINDEX=0x1027, LVM_GETCOUNTPERPAGE=0x1028, funcID=0
+		static 	LVM_GETTOPINDEX=0x1027, funcID=0
 
 		IfEqual, gFiles, , return
 
@@ -426,9 +426,6 @@ Preview(){
 
 		SendMessage, LVM_GETTOPINDEX, 0, 0, ,ahk_id  %hlvFiles%
 		topIndex := ErrorLevel
-
-		SendMessage, LVM_GETCOUNTPERPAGE, 0, 0, , ahk_id %hlvFiles%
-		gLvPage := ErrorLevel
 
 		cnt := LV_GetCount()
 		loop, % gLvPage+1
@@ -887,7 +884,6 @@ ExpandEnvVar(pPath){
 About(){
 	global
 	static txt
-
 	if !txt
 	{
 		txt = 
@@ -896,34 +892,33 @@ About(){
 		*%gTitle% %gVersion%* 
 		_by majkinetor_
 
-		"Visit Project Page":http://code.google.com/p/multi-rename-script &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "Check for new version":http://code.google.com/p/multi-rename-script/downloads/list
-
-
 		!http://www.autohotkey.net/~majkinetor/-Avatars/scaryroboo3k.gif!
-		[Links]
+		[Web]
 		"Total Commander Content Plugins":http://www.totalcmd.net/directory/content.html
 		"AutoHotKey":http://www.autohotkey.com
+		"r-moth webpage":http://code.r-moth.com
 		
 		[Modules]
-		"COM":http://www.autohotkey.com/forum/viewtopic.php?t=22923 - COM library.
-		"Accordion":http://www.autohotkey.com/forum/topic27182.html - Accordion dialog.
-		"ComboX":http://www.autohotkey.com/forum/topic22390.html - Impose combobox behavior on control.
-		"HLink":http://www.autohotkey.com/forum/topic19508.html - Custom HyperLink control.
+		"COM":http://www.autohotkey.com/forum/topic16631.html	- Component Object Model module
+		"Accordion":http://www.autohotkey.com/forum/topic27182.html - Accordion dialog
+		"ComboX":http://www.autohotkey.com/forum/topic22390.html - Impose combobox behavior on control
+		"HLink":http://www.autohotkey.com/forum/topic19508.html - Custom HyperLink control
 		"ShowMenu":http://www.autohotkey.com/forum/topic23138.html - Show menu from the text.
-		"Ini":http://www.autohotkey.com/forum/topic22495.html - Helper functions for easier ini file handling.
-		"Plugins":http://www.autohotkey.com/forum/topic22029.html - Plugin framework for non compiled scripts.
+		"Ini":http://www.autohotkey.com/forum/topic22495.html - Helper functions for easier ini file handling
+		"Plugins":http://www.autohotkey.com/forum/topic22029.html - Plugin framework for non compiled scripts
+		"ShowHTMLDialog":http://www.autohotkey.com/forum/topic24429.html - Show HTML dialog
 		"Attach":http://www.autohotkey.com/forum/topic48298.html - Attach controls in the window.
-		"Win":http://www.autohotkey.com/forum/topic47856.html - Window functions.
 
 		[Shortcuts]
-		@F12@	- Load default preset.
-		@DEL@   - Delete current preset if presets combo box is focused.
-		@ENTER@ - Save preset if presets combo box is focused.
-		@SHIFT click@ - Select left column of ComboX.
-		@ALT click@  - Select right column of ComboX.
+		@F12@	- Load default preset
+		@DEL@   - Delete current preset if presets combo box is focused
+		@ENTER@ - Save preset if presets combo box is focused
+		@SHIFT click@ - Select left column of ComboX
+		@ALT click@  - Select right column of ComboX
 
 		)
 	}
+
 	Accordion("About", "Multi-Rename Script", txt, 1, 500, 440)
 }
 
@@ -971,7 +966,7 @@ return
 #include inc\Shell.ahk			;Register shell extension
 
 ;================== modules ======================
-#include inc\m\COM.ahk
+#include inc\m\COM.ahk			
 #include inc\m\Plugins.ahk		
 #include inc\m\HLink.ahk		
 #include inc\m\Ini.ahk			
