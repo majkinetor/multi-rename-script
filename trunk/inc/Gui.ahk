@@ -179,12 +179,13 @@ GuiExit() {
 
 	Ini_ReplaceSection(gConfig, "MRUfm", inis_MRUfm )						;save MRUs
 	Ini_ReplaceSection(gConfig, "MRUsr", inis_MRUsr )
-	Win_Recall(">", "", gConfig)                     ;Store the Gui
 
 	IniWrite, %cfg_Expand%, %gConfig%, Config, Expand						;save expansion
 
 	p := eMask ">" eExt ">" eSearch ">" eReplace ">" cbRE  ">" ddCase 		;save last edit
 	IniWrite, %p%, %gConfig%, Config, LastEdit
+
+	Win_Recall(">", "", gConfig)                     ;Store the Gui
 }
 
 ;-------------------------------------------------------------------------------------

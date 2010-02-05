@@ -896,27 +896,27 @@ About(){
 
 
 		!http://www.autohotkey.net/~majkinetor/-Avatars/scaryroboo3k.gif!
-		[Web]
+		[Links]
 		"Total Commander Content Plugins":http://www.totalcmd.net/directory/content.html
 		"AutoHotKey":http://www.autohotkey.com
-		"r-moth webpage":http://code.r-moth.com
 		
 		[Modules]
-		"Accordion":http://www.autohotkey.com/forum/topic27182.html - Accordion dialog
-		"ComboX":http://www.autohotkey.com/forum/topic22390.html - Impose combobox behavior on control
-		"HLink":http://www.autohotkey.com/forum/topic19508.html - Custom HyperLink control
+		"COM":http://www.autohotkey.com/forum/viewtopic.php?t=22923 - COM library.
+		"Accordion":http://www.autohotkey.com/forum/topic27182.html - Accordion dialog.
+		"ComboX":http://www.autohotkey.com/forum/topic22390.html - Impose combobox behavior on control.
+		"HLink":http://www.autohotkey.com/forum/topic19508.html - Custom HyperLink control.
 		"ShowMenu":http://www.autohotkey.com/forum/topic23138.html - Show menu from the text.
-		"Ini":http://www.autohotkey.com/forum/topic22495.html - Helper functions for easier ini file handling
-		"Plugins":http://www.autohotkey.com/forum/topic22029.html - Plugin framework for non compiled scripts
-		"Attach":http://www.autohotkey.com/forum/topic48298.html - Attach controls in the window
-		"Win":http://www.autohotkey.com/forum/topic47856.html - Window functions
+		"Ini":http://www.autohotkey.com/forum/topic22495.html - Helper functions for easier ini file handling.
+		"Plugins":http://www.autohotkey.com/forum/topic22029.html - Plugin framework for non compiled scripts.
+		"Attach":http://www.autohotkey.com/forum/topic48298.html - Attach controls in the window.
+		"Win":http://www.autohotkey.com/forum/topic47856.html - Window functions.
 
 		[Shortcuts]
-		@F12@	- Load default preset
-		@DEL@   - Delete current preset if presets combo box is focused
-		@ENTER@ - Save preset if presets combo box is focused
-		@SHIFT click@ - Select left column of ComboX
-		@ALT click@  - Select right column of ComboX
+		@F12@	- Load default preset.
+		@DEL@   - Delete current preset if presets combo box is focused.
+		@ENTER@ - Save preset if presets combo box is focused.
+		@SHIFT click@ - Select left column of ComboX.
+		@ALT click@  - Select right column of ComboX.
 
 		)
 	}
@@ -967,6 +967,7 @@ return
 #include inc\Shell.ahk			;Register shell extension
 
 ;================== modules ======================
+#include inc\m\COM.ahk
 #include inc\m\Plugins.ahk		
 #include inc\m\HLink.ahk		
 #include inc\m\Ini.ahk			
