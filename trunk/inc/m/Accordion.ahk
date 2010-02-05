@@ -38,91 +38,16 @@ Accordion(title, topic, text, on=1, w=500, h="", x="", y=""){
 		j := RegExMatch( text, "(?<=^|\n)\s*\[([^\n]+?)\]\n\s*([^[].*?\s*)(?=\n\[)", v, j+StrLen(v)+1)
 		if !j
 			break
-		html .= "<dt>" v1 "</dt>`n<dd>" ACC_proc(v2) "</dd>`n"
+		html .= "<dt>" v1 "</dt>`n<dd>" Accordion_proc(v2) "</dd>`n"
 	}
 	html .= "</dl></body></html>"
 
 	FileDelete, %fn% 
 	FileAppend, %html%, %fn%
-	ShowHTMLDialog(fn, "", (h ? "dialogHeight:" h "px;" : "") (w ? "dialogWidth:" w "px;" : "") (x ? "dialogLeft:" x "px;" : "") (y ? "dialogTop:" y "px;" : ""))
+	Run, %fn%
 }
 
-; By Lexikos
-ShowHTMLDialog(URL, argIn="", Options="", hwndParent=0, Flags=0) 
-{ 
-    ; "Typically, the COM library is initialized on a thread only once. Subsequent 
-    ;  calls to CoInitialize or CoInitializeEx on the same thread will succeed,..." 
-    COM_CoInitialize() 
-    
-    hinstMSHTML := DllCall("LoadLibrary","str","MSHTML.DLL") 
-    hinstUrlMon := DllCall("LoadLibrary","str","urlmon.dll") ; necessary to keep the URL moniker in memory. 
-    
-    if !hinstMSHTML or !hinstUrlMon 
-        goto ShowHTMLDialog_Exit 
-    
-    pUrl := COM_SysAllocString(URL) 
-    
-    hr := DllCall("urlmon\CreateURLMonikerEx","uint",0,"uint",pUrl,"uint*",pUrlMoniker,"uint",1) 
-    if (ErrorLevel) { 
-        Error = DllCall(CreateURLMoniker)--%ErrorLevel% 
-        goto ShowHTMLDialog_Exit 
-    } 
-    if (hr or !pUrlMoniker) { 
-        Error = CreateURLMoniker--%hr% 
-        goto ShowHTMLDialog_Exit 
-    } 
-
-    pOptions := Options!="" ? COM_SysAllocString(Options) : 0 
-    
-    pArgIn := COM_SysAllocString(argIn) 
-    VarSetCapacity(varArgIn, 16, 0), NumPut(8,varArgIn,0), NumPut(pArgIn,varArgIn,8) 
-    VarSetCapacity(varResult, 16, 0) 
-
-    if Flags 
-        hr := DllCall("mshtml\ShowHTMLDialogEx","uint",hwndParent,"uint",pUrlMoniker,"uint",Flags,"uint",&varArgIn,"uint",pOptions,"uint",&varResult) 
-    else 
-        hr := DllCall("mshtml\ShowHTMLDialog","uint",hwndParent,"uint",pUrlMoniker,"uint",&varArgIn,"uint",pOptions,"uint",&varResult) 
-    if (ErrorLevel) { 
-        Error = DllCall(ShowHTMLDialog)--%ErrorLevel% 
-        goto ShowHTMLDialog_Exit 
-    } 
-    if (hr) { 
-        Error = ShowHTMLDialog--%hr% 
-        goto ShowHTMLDialog_Exit 
-    } 
-    ; based on a line from COM_Invoke(). returnValue = varResult as string; 
-    InStr(" 0 4 5 6 7 14 "," " . NumGet(varResult,0,"Ushort") . " ") ? DllCall("oleaut32\VariantChangeTypeEx","Uint",&varResult,"Uint",&varResult,"Uint",0,"Ushort",0,"Ushort",8) : "", NumGet(varResult,0,"Ushort")=8 ? (returnValue:=COM_Ansi4Unicode(NumGet(varResult,8))) . COM_SysFreeString(NumGet(varResult,8)) : returnValue:=NumGet(varResult,8) 
-    
-ShowHTMLDialog_Exit: 
-    if pArgIn 
-        COM_SysFreeString(pArgIn) 
-    if pOptions 
-        COM_SysFreeString(pOptions) 
-    if pUrlMoniker 
-        COM_Release(pUrlMoniker) 
-    if pUrl 
-        COM_SysFreeString(pUrl) 
-    
-    ; "Each process maintains a reference count for each loaded library module. 
-    ;  This reference count is incremented each time LoadLibrary is called and 
-    ;  is decremented each time FreeLibrary is called." 
-    ; -- So FreeLibrary() will not unload these DLLs if they were loaded before 
-    ;    the function was called. :) 
-    if hinstMSHTML 
-        DllCall("FreeLibrary","uint",hinstMSHTML) 
-    if hinstUrlMon 
-        DllCall("FreeLibrary","uint",hinstUrlMon) 
-    
-    ; "To close the COM library gracefully, each successful call to CoInitialize 
-    ;  or CoInitializeEx, including those that return S_FALSE, must be balanced 
-    ;  by a corresponding call to CoUninitialize." 
-    COM_CoUninitialize() 
-    
-    ErrorLevel := Error 
-    return returnValue 
-}
-
-ACC_proc(txt) {
+Accordion_proc(txt) {
 	StringReplace, txt, txt,`r,,A
 	StringReplace, txt, txt,`n,<br>`n, A
 
