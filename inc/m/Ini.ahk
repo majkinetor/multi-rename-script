@@ -45,14 +45,15 @@ Ini_LoadSection( pIniFile, pSection="", pPrefix="inis_") {
 		
   
 		VarSetCapacity(res, 0x7FFF, 0),  s := DllCall("GetPrivateProfileSection" , "str", pSection, "str", res, "uint", 0x7FFF, "str", pIniFile)
-    
 		Loop, % s-1								
-			if !NumGet(res, A_Index-1, "UChar")			; Each line within the section is terminated with a null character.  Replace each delimiting null char with a newline
-				NumPut(10, res, A_Index-1, "UChar")		; \0 -> \n 
-    
+			if !NumGet(res, (A_Index-1)*2, "Char")			; Each line within the section is terminated with a null character.  Replace each delimiting null char with a newline
+				NumPut(10, res, (A_Index-1)*2, "Char")		; \0 -> \n
+
+		VarSetCapacity(res, -1)
+
 		if A_OSVersion in WIN_ME,WIN_98,WIN_95										; Windows Me/98/95: The returned string includes comments.
 			res := RegExReplace(res, "m`n)^[ `t]*(?:;.*`n?|`n)|^[ `t]+|[ `t]+$")	; This removes comments. Also, I'm not sure if leading/trailing space is automatically removed on Win9x, so the regex removes that too. 
-    
+
 		return res
 	}
 	
