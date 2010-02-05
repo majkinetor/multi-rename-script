@@ -33,10 +33,6 @@ FileEncoding, UTF-16
 return
 
 
-a() {
-	return A_IsUnicode ? "a" : ""
-}
-
 Tr( ByRef var ) {
 	Transform, var, FromCodePage, 0, %var%
 }
@@ -416,8 +412,8 @@ ParseSR() {
 ;			Files in the list for which preview is already done, will not be previewd 
 ;			again until ProcId changes.
 Preview(){
-		local topIndex, page, fpath, cnt, procid, pid, fid
-		static 	LVM_GETTOPINDEX=0x1027, funcID=0
+		local topIndex, page, fpath, cnt, procid, pid, fid, gLvPage
+		static 	LVM_GETTOPINDEX=0x1027,	LVM_GETCOUNTPERPAGE=0x1028, funcID=0
 
 		IfEqual, gFiles, , return
 
@@ -427,10 +423,14 @@ Preview(){
 		SendMessage, LVM_GETTOPINDEX, 0, 0, ,ahk_id  %hlvFiles%
 		topIndex := ErrorLevel
 
+	 
+		SendMessage, LVM_GETCOUNTPERPAGE, 0, 0, , ahk_id %hlvFiles%
+		gLvPage := ErrorLevel + 1
+
 		cnt := LV_GetCount()
-		loop, % gLvPage+1
+		loop, % gLvPage
 		{
-			sleep -1												;read windows quiue
+			sleep -1												;read msg queue
 			if (pid != gProcId) or (fid != funcID) or gWorking		;if (proc changed while in preview) or (preview is launched again while it is still runing) or (user started some operation)
 				break
 
@@ -440,8 +440,12 @@ Preview(){
 
 			LV_GetText(procid, #no, 4)
 			if (procid != pid)		;if already calculated, don't do it again (remember procID which is unique number of each change)
-				#flag := "prev", LV_GetText(fpath, #no, 3), LV_Modify(#no, "col2", (!gParseError) ? Proc( fpath ) : "<Error!>"), LV_Modify(#no, "col4", pid)
-			
+			{
+				#flag := "prev"
+				LV_GetText(fpath, #no, 3)
+				LV_Modify(#no, "col2", !gParseError ? Proc( fpath ) : "<Error!>" )
+				LV_Modify(#no, "col4", pid)
+			}			
 		}
 }
 
