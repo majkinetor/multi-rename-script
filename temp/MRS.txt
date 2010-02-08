@@ -1,32 +1,32 @@
+h1. Multi Rename Script
+
 h3. Overview
 
 Multi-Rename Script(MRS) is open source application for massive file renaming. 
-
-You probably wonder why another one, but during the years I didn't find the one that fulfills all my needs in given moment. 
 MRS is not limited to finite number of rename actions so you can rename files based on any criteria and you can write your own. Its up to you if its going to be simple file name manipulation or complex one, like using database or Internet to get information about the new file name.
 
-MRS is based on "Total Commander's":TC (TC) multi-rename tool. File name masks from TC will generally work unchanged. TC content plugins are also supported and automatically recognized if you have normal TC installation. This feature alone opens the world to Explorers Shell Extensions which can be used as rename mask providers.
-MRS also has its own plugin interface using AutoHotKey language. With basic programming experience you can extend basic file-rename operations. To create/change plugin or even MRS itself, nothing else but Notepad is needed.
+MRS is influenced by "Total Commander's":TC (TC) Multi-Rename Tool. File name masks from TC will generally work unchanged. TC content plugins are also supported and automatically recognized if you have normal TC installation. This feature alone opens the world to Explorers Shell Extensions which can be used as rename mask providers. Its not necessry to have Total Commander installed for any of the MRS functionalities. 
+
+MRS also has its own plugin interface using AutoHotKey language. With basic programming experience you can extend file-rename operations. To create/change plugin or even MRS itself, nothing else but text editor is needed.
 
 <txp:image name="MRS.png" wraptag="div" class="swimage"/>
 
 h3. Features
 
-* Great number of simple file masks
-* AHK plugins and support for TC's content plugins
-* Perl regular expressions search & replace
-* Real time preview for all files in the list
-* Undo, Presets, MRUs, configurable menus
-* No file limit, works equaly fast with any number of files
-* Command line driving
+* Great number of simple file masks.
+* AHK plugins and support for Total Commander content plugins.
+* Perl regular expressions search & replace.
+* Real time preview for all files in the list.
+* Undo, Presets, MRUs, configurable menus.
+* No file limit, works equaly fast with any number of files.
+* Command line driving.
+* Unicode.
 * Open source, developed in AutoHotKey so you can change any part of the program quickly
 
 
 h3. Installation
 
-If you have AutoHotKey installed, just unpack the archive to directory of your choice and run MRS.ahk .
-Otherwise, first download and install "AutoHotKey":AHK (~1 MB). 
-MRS keeps all its data in its own folder. To uninstall it, simply delete its root folder.
+MRS is portable application. Just unpack the archive to the directory of your choice. To uninstall it, simply delete the directory.
 
 h3. Usage
 
@@ -70,8 +70,9 @@ Specify case here to be applied finally. Case can be also specified using case m
 *Expander*
 Pressing the little button with arrow bellow search and replace field will expand user interface.
 Expanded interface contains buttons that will let you select rename-mask using categories. Button _Plugins_ will show the menu with list of installed plugins.
+AHK plugins are shown bellow Total Commander plugins delimited by separator.
 
-There is also combo box with presets you saved. Pressing the save button next to the combo will prompt you for preset name. You can delete selected preset by pressing @DEL@ key. Pressing @F12@ will load default preset.
+There is also combo box with presets you saved. Type the name and press ENTER to save the preset. Type the preset name or use the combox box to select the preset. You can delete selected preset by pressing @DEL@ key. Pressing @F12@ will load default preset.
 
 You can change/add/remove entries from the button menus by editing @res\menus.ini@ file. The format of this file is self explanatory.
 
@@ -156,7 +157,6 @@ To Create AHK plugin nothing but the text editor is needed. Plugin interface is 
 * If it has more then 1 field, it must specify field names in the GetFields subroutine separated by new lines (in @#Res@ variable, again). You can use "*" here to say that plugin accepts anything as field name (this can be used to pass arbitrary parameter to the plugin). MRS will later pass the filed name to the plugin as @#1@ parameter to its main subroutine. To specify field unit, set units after the field name using "|" as separator.
 * Use @\plugins\myplugin@ file as a template for new plugin. You can use any AutoHotKey function when creating AHK plugin. Check out AHK documentation for details.
 * Total commander plugins are dll's so programming tools are required. Check out TC's content plugin SDK for more information.
-* 
 
 h3. Masks
 
