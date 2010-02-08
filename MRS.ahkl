@@ -99,7 +99,7 @@ GetCmdLine() {
 		gCmdPreset := ""
 
 	if !FileExist( file ) {
-		MsgBox 16, %gTitle%, File doesn't exist:`n`n%file%
+		MsgBox, 16, %gTitle%, File doesn't exist:`n`n%file%
 	} else, FileRead, gFiles, %file%
 
 	if (*&gCmdPreset = 62){	;">"
