@@ -9,7 +9,7 @@ FileEncoding, UTF-8
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
-	gVersion	:= "1.2"
+	gVersion	:= "1.5 beta"
 	gGuiHeight	:= 500,  gGuiWidth	:= 800
 	gResultList	:= "res\ResultList.txt"
 	gPreviewFile:= "res\Preview.txt"
@@ -31,11 +31,6 @@ FileEncoding, UTF-8
 		 Preset_Set(cfg_LastEdit, false) 
 	else Preset_Set("[N]>[E]", false) 
 return
-
-
-a() {
-	return A_IsUnicode ? "a" : ""
-}
 
 Tr( ByRef var ) {
 	Transform, var, FromCodePage, 0, %var%
