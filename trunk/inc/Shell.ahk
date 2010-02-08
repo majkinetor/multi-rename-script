@@ -65,13 +65,11 @@ DropTargetOpen(pGuid){
 
 DropTargetClose(Shell_nRegister)
 {
-	m(A_ThisFunc)
 	DllCall("ole32\CoRevokeClassObject", "Uint", Shell_nRegister)
 	COM_Term()
 }
 
 Shell_GetData(this){
-	m(A_ThisFunc)
 	VarSetCapacity(FormatEtc,20,0), VarSetCapacity(StgMedium,12,0)
 	NumPut(DllCall("RegisterClipboardFormat", "str", "Shell IDList Array"),FormatEtc,0), NumPut(0,FormatEtc,4), NumPut(1,FormatEtc,8), NumPut(-1,FormatEtc,12), NumPut(1,FormatEtc,16)
 	
