@@ -1,8 +1,16 @@
-v1.2
-----
+v1.5a
+-----
 + Unicode support. Total Commander plugins are still not unicode (because mostly still don't support it). AHK plugins are Unicode.
 + Resizable window (window placement is saved in ini)
 + Rename operation will create directory if it doesn't exist (__meta__)
 * Preset Save button and DropDown replaced with single editable ComboBox.
   To save preset write its desired name and press ENTER.
   To load preset select it from the list or type its name.
+  
+v1.1
+-----
+* ComboX, HLink modules updated. This will fix ComboX issue where plugin buttons were drawn over it.
++ CTRL + A hotkey added to select all files in the list view.
++ Little gui improvements. 
+! Bugfix: Script freezing, mostly on Win7 & Vista. 
++ New AHK plugin Sub: Extracts substring from file name from str1 up to the str2.
