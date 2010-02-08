@@ -34,7 +34,6 @@ Shell_Init(lbl) {
 		msgbox Shell init failed
 		ExitApp
 	}
-	m(SHell_nRegister)
 }
 
 DropTargetClose:
@@ -81,7 +80,7 @@ Shell_GetData(this){
 	pData:=	DllCall("GlobalLock", "Uint", hData)
 	pidlP:=	pData+NumGet(pData+4), VarSetCapacity(sPath, 259)
 	Loop, %	NumGet(pData+0)
-		pidl:=DllCall("shell32\ILCombine", "Uint", pidlP, "Uint", pData+NumGet(pData+4+4*A_Index)), DllCall("shell32\SHGetPathFromIDListA", "Uint", pidl, "str", sPath), COM_CoTaskMemFree(pidl), sData .= sPath . "`n"
+		pidl:=DllCall("shell32\ILCombine", "Uint", pidlP, "Uint", pData+NumGet(pData+4+4*A_Index)), DllCall("shell32\SHGetPathFromIDListW", "Uint", pidl, "str", sPath), COM_CoTaskMemFree(pidl), sData .= sPath . "`n"
 	DllCall("GlobalUnlock", "Uint", hData)
 	DllCall("ole32\ReleaseStgMedium", "Uint", &StgMedium)
 
