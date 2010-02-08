@@ -157,7 +157,7 @@ ProcMask( fpath, a ) {
 		#fp := fpath,  #fe := fe,  #fn := fn,  #fd := dir,  #Res :=""		;set always as plugin can change them
 		if IsLabel(fun)
 			GoSub %fun%
-	
+
 		if (a%a%_%A_Index%_rng1 != "") {
 			#fn := #Res, #1:= a%a%_%A_Index%_rng1, #2:= a%a%_%A_Index%_rng2, #3:= a%a%_%A_Index%_rng3
 			goSub N
@@ -643,6 +643,10 @@ DoReload(){
 ;         Rename files using current processor 
 DoRename(){ 
    local newName, oldPath, newPath, dir, cnt, res, delRow := 1, flags := 0, dire,ext,name_no_ext 
+   static adrMoveFileEx
+
+   if !adrMoveFileEx
+	  adrMoveFileEx := DllCall("GetProcAddress", "uint", DllCall("GetModuleHandle", "str", "user32"), "astr", "MoveFileExW")
 
    if (gParseError)    {    
       MsgBox Mask Error. 
@@ -664,9 +668,9 @@ DoRename(){
 
       SplitPath, newPath, ,dir 
       IfNotExist, %dir% 
-			FileCreateDir, %dir% 
+		 FileCreateDir, %dir% 
 
-      res := DllCall("MoveFileEx", "str", oldPath, "str", newpath, "uint", flags) 
+      res := DllCall(adrMoveFileEx, "str", oldPath, "str", newpath, "uint", flags) 
       if !res 
          LV_Modify(delRow, "col5", ErrMsg() ), delRow++ 
       else { 

@@ -3,6 +3,7 @@ v1.5a
 + Unicode support. Total Commander plugins are still not unicode (because mostly still don't support it). AHK plugins are Unicode.
 + Resizable window (window placement is saved in ini)
 + Rename operation will create directory if it doesn't exist (__meta__)
++ If you hold CTRL while using drag&drop or shell extension to add single folder, MRS will add its files instead.
 * Preset Save button and DropDown replaced with single editable ComboBox.
   To save preset write its desired name and press ENTER.
   To load preset select it from the list or type its name.
