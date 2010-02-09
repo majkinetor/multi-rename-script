@@ -646,7 +646,7 @@ DoRename(){
    static adrMoveFileEx
 
    if !adrMoveFileEx
-	  adrMoveFileEx := DllCall("GetProcAddress", "uint", DllCall("GetModuleHandle", "str", "user32"), "astr", "MoveFileExW")
+	  adrMoveFileEx := DllCall("GetProcAddress", "uint", DllCall("GetModuleHandle", "str", "Kernel32.dll"), "astr", "MoveFileExW")
 
    if (gParseError)    {    
       MsgBox Mask Error. 
@@ -669,7 +669,7 @@ DoRename(){
       SplitPath, newPath, ,dir 
       IfNotExist, %dir% 
 		 FileCreateDir, %dir% 
-
+		 
       res := DllCall(adrMoveFileEx, "str", oldPath, "str", newpath, "uint", flags) 
       if !res 
          LV_Modify(delRow, "col5", ErrMsg() ), delRow++ 
