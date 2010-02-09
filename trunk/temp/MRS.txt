@@ -26,10 +26,27 @@ h3. Features
 h3. Installation
 
 MRS is portable application. Just unpack the archive to the directory of your choice. 
-In some systems you will have to add MRS.exe in Data Execution Prevention (DEP) list. You can do so using "System" Control Panel applet (Advanced -> Performance section -> Data Execution Prevention tab).
+In some systems you will have to add MRS.exe in Data Execution Prevention (DEP) list. You can do so using "System" Control Panel applet (_Advanced -> Performance section -> Data Execution Prevention_ tab).
 
 To uninstall MRS, simply delete the directory. If you enabled shell extension you need to disable it first.
 
+
+h3. Integration
+
+Although MRS can be used standalone, its the best to integrate it with your file manager. 
+
+*Explorer*
+Enable Shell Extension ( _?->Settings->Enable Shell Extension_ ).
+
+*Total Commander*
+Edit Start menu ( _Start->Change Start Menu_ ) and use @%UL@ as parameter (this will send Unicode List of files to MRS).
+You can also recall preset directly from the TC menu to be applied as soon as you activate the menu item, without showing MRS GUI. To do so specify MRS preset after the @%UL@ parameter or write new preset directly. For instance the following TC menu command will add counter to the selected files using TC file list order:
+
+bc. Title:		Rename with counter
+Command:	MRS.exe
+Parameters:	AutoHotKey.ini %UL "[C]. [N]"
+
+For other file managers procedure should be similar. See Command Line section for additional dettails.
 
 h3. Usage
 
@@ -148,7 +165,6 @@ About TC content plugins, MRS will try to find location of the @wincmd.ini@ usin
 If you don't have TC installed you can still use its content plugins. To install plugin without TC, create folder in @\plugins@ with the same name as that of content plugin, put plugin there and restart MRS. The only rule is that the folder must be named the same as content plugin otherwise it will not be recognized. To use always plugins from the MRS plugins folder, no matter configuration of your local TC installation, set @tcIni=!@ in MRS.ini @Config@ section.
 
 To verify plugin installation expand MRS interface and click _Plugins_ button. All installed plugins should be in the list.
-
 
 
 h3. Writing plugins
