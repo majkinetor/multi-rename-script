@@ -39,7 +39,7 @@ Although MRS can be used standalone, its the best to integrate it with your file
 Enable Shell Extension ( _?->Settings->Enable Shell Extension_ ).
 
 *Total Commander*
-Edit Start menu ( _Start->Change Start Menu_ ) and use @%UL@ as parameter (this will send Unicode List of files to MRS).
+Edit Start menu ( _Start->Change Start Menu_ ) and use @%UL@ as parameter (this will send Unicode List of files to MRS, requires TC 7.5++).
 You can also recall preset directly from the TC menu to be applied as soon as you activate the menu item, without showing MRS GUI. To do so specify MRS preset after the @%UL@ parameter or write new preset directly. For instance the following TC menu command will add counter to the selected files using TC file list order:
 
 bc. Title:		Rename with counter
