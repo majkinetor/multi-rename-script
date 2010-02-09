@@ -1,3 +1,8 @@
+v1.5c
+------
++ Optmization: Improved speed of editor preview a lot.
++ DirCnt AHK Plugin added
+
 v1.5b
 -----
 + TCWdx module improved: 
