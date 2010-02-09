@@ -46,10 +46,11 @@ bc. Title:		Rename with counter
 Command:	MRS.exe
 Parameters:	AutoHotKey.ini %UL "[C]. [N]"
 
-For other file managers procedure should be similar. See Command Line section for additional dettails.
+For other file managers procedure should be similar. See Command Line section for additional details.
 
 h3. Usage
 
+*Rename*
 In MRS, you build up a new file names using name-masks, search & replace and casing operations. File name mask is the string describing how to build up a new file name based on the currently processed file name and its position in the file list. Basic masks are always written between [ ]. Anything not among angular brackets is literal. To build up complete mask you concatenate basic masks and literal words. For instance, file name mask:
 
 bc. No=[C:2] Name=[N4,10]
@@ -66,6 +67,11 @@ After the mask, file name is processed with regular expression (RE) search & rep
 
 In the file list, you can see real time preview for your current rename operation. Once you build the mask you can press Start button to rename all files in the list. You can always restore previous names with Undo operation, even if you restart the application.
 
+*Report*
+You can use MRS to generate file and directory reports using plugins. The difference between renaming and reporting operation is simply that you don't use @Start@ button but @Editor Preview@ instead to show generated text. This means that you can use all charachters desired, not only those allowed for the file names. For example, the following mask generates CSV file with details about each file in the list containing the file/directory name, number of files in the diretory, owner, full path, and creation date:
+
+bc. [N];[=DirSizeCalc.File Count (on demand)] files;[=ShellDetails.Owner];[1-];[=ShellDetails.Date Created]
+
 <txp:image name="MRS_scheme.gif" wraptag="div" class="swimage"/>
 
 h3. Interface elements
@@ -79,7 +85,7 @@ File Extension Mask. All masks used for a file name can be used here.
 *Search & Replace*
 Enter search and replace strings here. You can specify multiple criteria by using | separator (not with RE option enabled).
 For instance:
-  Search for: @ä|ö|ü|@  Replace with: @ae|oe|ue@
+  Search for: @Ã¤|Ã¶|Ã¼|@  Replace with: @ae|oe|ue@
 
 If RE option is turned on search string is specified as PERL regular expression and you can use backreferences like @$1@ in the replace field. There are number of regular expression options that can be set at the beginning of the search string followed by an close-parenthesis. For instance, the pattern @i)abc.*123@ would turn on the case-insensitive option and search for "abc" followed by "123".
 
@@ -212,6 +218,24 @@ Maks are written betwen angular brackets: @[mask]@
 |[|Opening square bracket|
 |]|Closing square bracket|
 
+
+h3. About
+
+MRS is free, open source application. You are encouraged to modify any part of it and share it. If you write cool plugin consider sharing it (via forum for instance) and if its of general usability I will consider including it in the future versions.
+
+
+
+|*Developed by*:|Miodrag MiliÄ‡|
+|*License*:|"BSD":BSD|
+|*Contact*:| miodrag.milic@gmail.com|
+|*Location*:| Belgrade, Serbia|
+
+
+
+_Last Changed:  09/02/2010_
+
+
+[BSD]http://creativecommons.org/licenses/BSD
 [AHK]http://www.AutoHotkey.com
 [AHKre]http://www.autohotkey.com/docs/misc/RegEx-QuickRef.htm
 [Content]http://www.totalcmd.net/directory/content.html
