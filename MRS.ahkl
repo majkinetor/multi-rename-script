@@ -9,7 +9,7 @@ FileEncoding, UTF-8
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
-	gVersion	:= "1.5 beta"
+	gVersion	:= "1.5 b"
 	gGuiHeight	:= 500,  gGuiWidth	:= 800
 	gResultList	:= "res\ResultList.txt"
 	gPreviewFile:= "res\Preview.txt"
@@ -976,7 +976,6 @@ return
 #include inc\m\Ini.ahk			
 #include inc\m\ComboX.ahk		
 #include inc\m\ErrMsg.ahk		
-#include inc\m\CreateFont.ahk	
 #include inc\m\ShowMenu.ahk
 #include inc\m\Accordion.ahk
 #include inc\m\Win.ahk

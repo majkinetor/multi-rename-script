@@ -111,7 +111,7 @@ In some systems you will have to add <span class="caps">MRS</span>.exe in Data E
 Enable Shell Extension ( <em>?-&#62;Settings-&#62;Enable Shell Extension</em> ).</p>
 
 	<p><strong>Total Commander</strong><br />
-Edit Start menu ( <em>Start-&#62;Change Start Menu</em> ) and use <code>%UL</code> as parameter (this will send Unicode List of files to <span class="caps">MRS</span>).<br />
+Edit Start menu ( <em>Start-&#62;Change Start Menu</em> ) and use <code>%UL</code> as parameter (this will send Unicode List of files to <span class="caps">MRS</span>, requires TC 7.5++).<br />
 You can also recall preset directly from the TC menu to be applied as soon as you activate the menu item, without showing <span class="caps">MRS</span> <span class="caps">GUI</span>. To do so specify <span class="caps">MRS</span> preset after the <code>%UL</code> parameter or write new preset directly. For instance the following TC menu command will add counter to the selected files using TC file list order:</p>
 
 <pre><code>Title:		Rename with counter
@@ -231,7 +231,7 @@ To specify plugin in file mask, use <code>[=plugin.field.unit]</code> notation. 
 
 	<p>	<code>[=FileInfo:4-9]</code></p>
 
-	<p>where range is used the same way as with [N] mask.</p>
+	<p>where range is used the same way as with <code>[N]</code> mask.</p>
 
 	<p>TC plugin ShellDetails provides data from Explorer&#8217;s shell extensions.</p>
 
@@ -241,7 +241,7 @@ To specify plugin in file mask, use <code>[=plugin.field.unit]</code> notation. 
 
 	<p>About TC content plugins, <span class="caps">MRS</span> will try to find location of the <code>wincmd.ini</code> using system registry and if that fails, <code>COMMANDER_PATH</code> environment variable. It will then load all plugins found in TC configuration file. To override this behavior, set location of the <code>wincmd.ini</code> in the <span class="caps">MRS</span> configuration file, <code>MRS.ini</code> (Section: <code>Config</code>,  Key: <code>tcIni</code>).</p>
 
-	<p>If you don&#8217;t have TC installed you can still use its content plugins. To install plugin without TC, create folder in <code>\plugins</code> with the same name as that of content plugin, put plugin there and restart <span class="caps">MRS</span>. The only rule is that the folder must be named the same as content plugin otherwise it will not be recognized. To use always plugins from the <span class="caps">MRS</span> plugins folder, no matter configuration of your local TC installation, set <code>tcIni=!</code> in <span class="caps">MRS</span>.ini <code>Config</code> section.</p>
+	<p>If you don&#8217;t have TC installed you can still use its content plugins. To install plugin without TC, simply copy it (or its folder) to <code>\plugins</code> folder. To use always plugins from the <span class="caps">MRS</span> plugins folder, no matter configuration of your local TC installation, set <code>tcIni=!</code> in <span class="caps">MRS</span>.ini <code>Config</code> section.</p>
 
 	<p>To verify plugin installation expand <span class="caps">MRS</span> interface and click <em>Plugins</em> button. All installed plugins should be in the list.</p>
 
