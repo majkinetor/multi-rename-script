@@ -157,7 +157,7 @@ You can select range from plugin data using syntax:
 
 	@[=FileInfo:4-9]@
 
-where range is used the same way as with [N] mask.
+where range is used the same way as with @[N]@ mask.
 
 TC plugin ShellDetails provides data from Explorer's shell extensions.
 
@@ -168,7 +168,7 @@ AHK plugins are single AHK script files and they have .ahk extension. To install
 
 About TC content plugins, MRS will try to find location of the @wincmd.ini@ using system registry and if that fails, @COMMANDER_PATH@ environment variable. It will then load all plugins found in TC configuration file. To override this behavior, set location of the @wincmd.ini@ in the MRS configuration file, @MRS.ini@ (Section: @Config@,  Key: @tcIni@).
 
-If you don't have TC installed you can still use its content plugins. To install plugin without TC, create folder in @\plugins@ with the same name as that of content plugin, put plugin there and restart MRS. The only rule is that the folder must be named the same as content plugin otherwise it will not be recognized. To use always plugins from the MRS plugins folder, no matter configuration of your local TC installation, set @tcIni=!@ in MRS.ini @Config@ section.
+If you don't have TC installed you can still use its content plugins. To install plugin without TC, simply copy it (or its folder) to @\plugins@ folder. To use always plugins from the MRS plugins folder, no matter configuration of your local TC installation, set @tcIni=!@ in MRS.ini @Config@ section.
 
 To verify plugin installation expand MRS interface and click _Plugins_ button. All installed plugins should be in the list.
 

@@ -1,3 +1,11 @@
+v1.5b
++ TCWdx module improved: 
+  + Unicode support for TC content plugins - module will first try W export, then A export, then it will return error.
+  + It cashes function adresses for faster subsequent calls. HTML manual for external use.
+  * Removed dependency on folder names to be equal to content plugins names. When TC ini file is not present, module now searches recursively for all wdx files in the \plugins folder.
++ Added TC content plugin cputil.wdx which allows to find file names with characters from a different code page, and rename them using conversion table.
+* Range will no longer flicker in "select range" inputbox.
+
 v1.5a
 -----
 + Unicode support in GUI and AHK Plugins. Total Commander plugins are still not unicode (because they still mostly don't support it).
