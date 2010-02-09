@@ -694,7 +694,7 @@ DoRename(){
 ; Parameters:
 ;			mode	- type of output (1,2,3)
 ;
-DoEditorPreview( mode=1 ){
+DoEditorPreview( Mode = 1 ){
 	local newName, oldPath, newPath, dir, cnt, res, delRow := 1, flags := 0
 
 	if (gParseError) 	{	
@@ -706,7 +706,7 @@ DoEditorPreview( mode=1 ){
 	FileDelete, %gPreviewFile%
 
 	Gui, ListView, lvFiles
-	cnt := LV_GetCount(), res := 1, Progress(true)
+	cnt := LV_GetCount(), Progress(true)
 	loop, %cnt%
 	{
 		#flag := "real", #no := A_Index,  LV_GetText(oldPath, #no, 3),  newName := Proc( oldPath )
@@ -714,20 +714,16 @@ DoEditorPreview( mode=1 ){
 		newPath := dir "\" newName
 
 		GuiControl,,Progress, +1
-		if !mod(A_Index, 10)			;do win messages
-			sleep, -1
 
-		goto PreviewMode_%mode%
-			PreviewMode_1:
-				FileAppend, %newName%`r`n, %gPreviewFile%
-			continue
-			PreviewMode_2:
-				FileAppend, %newPath%`r`n, %gPreviewFile%
-			continue
-			PreviewMode_3:
-				FileAppend, "%oldPath%" -> "%newName%"`r`n, %gPreviewFile%
-			continue
+		if Mode = 1 
+			res = %res%%newName%`n
+		else if Mode = 2
+			res = %res%%newPath%`n
+		else if Mode = 3
+			res = %res%"%oldPath%" -> "%newName%"`n
 	}
+	res := SubStr(res, 1, -1)
+	FileAppend, %res%, %gPreviewFile%
 	Progress(false), SetWorking( false )
 	Run, %gPreviewFile%
 }
