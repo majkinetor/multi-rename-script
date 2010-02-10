@@ -111,12 +111,19 @@ In some systems you will have to add <span class="caps">MRS</span>.exe in Data E
 Enable Shell Extension ( <em>?-&#62;Settings-&#62;Enable Shell Extension</em> ).</p>
 
 	<p><strong>Total Commander</strong><br />
-Edit Start menu ( <em>Start-&#62;Change Start Menu</em> ) and use <code>%UL</code> as parameter (this will send Unicode List of files to <span class="caps">MRS</span>, requires TC 7.5++).<br />
-You can also recall preset directly from the TC menu to be applied as soon as you activate the menu item, without showing <span class="caps">MRS</span> <span class="caps">GUI</span>. To do so specify <span class="caps">MRS</span> preset after the <code>%UL</code> parameter or write new preset directly. For instance the following TC menu command will add counter to the selected files using TC file list order:</p>
+Edit Start menu ( <em>Start-&#62;Change Start Menu</em> ) and use following settings: </p>
 
-<pre><code>Title:		Rename with counter
-Command:	MRS.exe
-Parameters:	AutoHotKey.ini %UL &#34;[C]. [N]&#34;
+<pre><code>Title:		Multi-Rename Script
+Command:	&#60;path_to_mrs&#62;\MRS.exe
+Parameters:	AutoHotKey.ini %UL
+Start In:	&#60;path_to_mrs&#62;
+</code></pre>
+
+	<p><code>%UL</code> parameter will make TC send Unicode List of files to <span class="caps">MRS</span> (requires TC 7.5++).</p>
+
+	<p>You can also recall preset directly from the TC menu to be applied as soon as you activate the menu item, without showing the <span class="caps">MRS</span> <span class="caps">GUI</span>. To do so specify <span class="caps">MRS</span> preset after the <code>%UL</code> parameter or write new preset directly. For instance, to add counter to selected files using TC file list order, use above settings with following Parameters:</p>
+
+<pre><code>Parameters:	AutoHotKey.ini %UL &#34;[C] [N]&#34;
 </code></pre>
 
 	<p>For other file managers procedure should be similar. See Command Line section for additional details.</p>
