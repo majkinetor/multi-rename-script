@@ -136,9 +136,12 @@ h3. Command line
 
 MRS accepts 2 command line arguments:
 
-bc. MRS  [fileList] [presetDef]
+bc. MRS.exe AutoHotKey.ini [fileList] [presetDef]
 
-@fileList	@
+@AutoHotKey.ini@
+Must be set as the first parameter.
+
+@fileList@
 This is list of full system paths of files you want to rename, each on new line.
 
 @presetDef@
