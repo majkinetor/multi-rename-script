@@ -1,7 +1,9 @@
+
 v1.5c
-------
+-----
+! Fixed issue with content plugins that have - in the name (i.e. jpg-comment.wdx)
 + Optmization: Improved speed of editor preview a lot.
-+ DirCnt AHK Plugin added
++ DirCnt AHK Plugin added.
 
 v1.5b
 -----
