@@ -1,5 +1,5 @@
-v1.5c
------
+v1.5c 19/02/2010
+----------------
 ! Fixed issue with content plugins that have - in the name (i.e. jpg-comment.wdx)
 + Optmization: Improved speed of editor preview a lot.
 
