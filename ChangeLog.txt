@@ -1,10 +1,10 @@
 v1.5c 19/02/2010
 ----------------
 ! Fixed issue with content plugins that have - in the name (i.e. jpg-comment.wdx)
-+ Optmization: Improved speed of editor preview a lot.
++ Optimization: Improved speed of editor preview a lot.
 
-v1.5b
------
+v1.5b 09/02/2010
+----------------
 + TCWdx module improved: 
   + Unicode support for TC content plugins - module will first try W export, then A export, then it will return error.
   + It cashes function adresses for faster subsequent calls. HTML manual for external use.
@@ -13,8 +13,8 @@ v1.5b
 + Added TC content plugin cputil.wdx which allows to find file names with characters from a different code page, and rename them using conversion table.
 + ShellDetails.wdx updated to Unicode version.
 
-v1.5a
------
+v1.5a 08/02/2010
+----------------
 + Unicode support in GUI and AHK Plugins. Total Commander plugins are still not unicode (because they still mostly don't support it).
 + Resizable window (window placement is saved in ini)
 + Rename operation will create directory if it doesn't exist (__meta__)
@@ -23,10 +23,14 @@ v1.5a
   To save preset write its desired name and press ENTER.
   To load preset select it from the list or type its name.
   
-v1.1
-----
+v1.1  16/12/2009
+----------------
 * ComboX, HLink modules updated. This will fix ComboX issue where plugin buttons were drawn over it.
 + CTRL + A hotkey added to select all files in the list view.
 + Little gui improvements. 
 ! Bugfix: Script freezing, mostly on Win7 & Vista. 
 + New AHK plugin Sub: Extracts substring from file name from str1 up to the str2.
+
+v1.0  06/02/2009
+-----------------
++ Initial release
