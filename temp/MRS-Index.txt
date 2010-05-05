@@ -236,16 +236,16 @@ MRS is free, open source application. You are encouraged to modify any part of i
 
 
 |*Developed by*:|Miodrag Milić|
-|*License*:|"BSD":BSD|
+|*License*:|"Unlicense":LIC|
 |*Contact*:| miodrag.milic@gmail.com|
 |*Location*:| Belgrade, Serbia|
 
 
 
-_Last Changed:  09/02/2010_
+_Last Changed:  04/05/2010_
 
 
-[BSD]http://creativecommons.org/licenses/BSD
+[LIC]http://unlicense.org/UNLICENSE
 [AHK]http://www.AutoHotkey.com
 [AHKre]http://www.autohotkey.com/docs/misc/RegEx-QuickRef.htm
 [Content]http://www.totalcmd.net/directory/content.html

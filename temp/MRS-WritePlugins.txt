@@ -2,7 +2,7 @@ To write AHK plugin you must have basic knowledge of AutoHotKey programming lang
 
 I will start from most trivial sample - plugin that returns the file size. Lets name this plugin @Size@
 
-In @\plugins@ folder there is ahk plugin template, file @myplugin@. You can use this file as a base for new MRS plugin. If you change extension of template file to @.ahk@ and reload MRS you can see that it immediately works if you click the _Plugins_ button. For the start go to @\plugins@ folder, and rename @MyPlugin@ file to @Size.ahk@ and open it in editor.
+In @\plugins@ folder there is ahk plugin template, file @myplugin@. You can use this file as a base for new MRS plugin. If you change extension of template file to @.ahk@ and reload MRS you can see that it immediately works if you click the _Plugins_ button. For the start go to @\plugins@ folder, and and create an copy of the @MyPlugin@ file to @Size.ahk@ and open it in editor.
 
 Now use search & replace of your editor to construct valid subroutine names:
 
