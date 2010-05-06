@@ -968,11 +968,15 @@ return
 ;================== modules ======================
 #include inc\m\COM.ahk
 #include inc\m\Plugins.ahk		
-#include inc\m\HLink.ahk		
 #include inc\m\Ini.ahk			
 #include inc\m\ComboX.ahk		
 #include inc\m\ErrMsg.ahk		
 #include inc\m\ShowMenu.ahk
 #include inc\m\Accordion.ahk
+
+;================== Forms ========================
+#include inc\m\Form.ahk
 #include inc\m\Win.ahk
 #include inc\m\Attach.ahk
+#include inc\m\HLink.ahk
+#include inc\m\Panel.ahk

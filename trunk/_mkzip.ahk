@@ -12,7 +12,8 @@
 	path_7z		= %A_ProgramFiles%\7-Zip\7z.exe
 	path_mkdoc	= %ComSpec% /c mkdoc.bat
 ;==============================================
-	FileCopy, MRS.ahkl, AutoHotKey.ini
+
+	FileCopy Mrs.ahkl, Mrs.ahk
 
 	opt = %1%
 	SplitPath, A_WorkingDIr, fileOut
@@ -25,7 +26,6 @@
 	opt = a -r %ign% %fileOut%
 	res .= Run( path_7z " " opt)
 
-	FileDelete, AutoHotKey.ini
 
 	bOK := FileExist( fileOut ) != ""
 	m("Result: " bOK )
