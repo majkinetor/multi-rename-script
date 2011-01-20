@@ -9,7 +9,7 @@ FileEncoding, UTF-8
 
 	;-- GLOBALS --------------------------
 	gTitle		:= "Multi-Rename Script"  
-	gVersion	:= "1.5c"
+	gVersion	:= "1.5"
 	gGuiHeight	:= 500,  gGuiWidth	:= 800
 	gResultList	:= "res\ResultList.txt"
 	gPreviewFile:= "res\Preview.txt"
