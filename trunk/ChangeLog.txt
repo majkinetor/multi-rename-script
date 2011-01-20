@@ -1,8 +1,9 @@
 v1.5
 ----------------
 + You don't have to add AutoHotKey to DEP list any more (Lexikos).
-+ AHK_L updated. This allows MRS script to keep its original name (MRS.ahk instead AutoHotKey.ini). 
-  This means that you can delete MRS.exe if you already have AHK_L asociated with ahk files.
++ AHK_L updated to 1.0.92.02 - January 19, 2011. This allows MRS script to keep its original name (MRS.ahk instead AutoHotKey.ini). 
+  You can delete MRS.exe if you already have AHK_L asociated with ahk files.
++ Plugin updates: Shell Details 1.22
 
 v1.5c 19/02/2010
 ----------------
