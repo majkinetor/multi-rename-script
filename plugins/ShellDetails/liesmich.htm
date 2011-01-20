@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>ShellDetails 1.12</title>
+<title>ShellDetails</title>
 <link href="./styles/layout.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="content">
-  <h1>ShellDetails 1.12</h1>
+  <h1>ShellDetails 1.22</h1>
       <p>ShellDetails ist ein Inhaltsplugin f&uuml;r den Total Commander.</p>
       <h2>Inhaltsverzeichnis</h2>
       <ol>
@@ -44,7 +44,8 @@
       <h2> 2. Systemvorraussetzungen<a name="requirements"></a></h2>
       <p> F &uuml;r diesen Plugin wird Total Commander 6.50  ben&ouml;tigt. <br>
   Es werden die Betriebsysteme Windows 2000, XP und 2003 unterst&uuml;tzt.<br>
-  Wenn ShellDetails unter einem anderen Betriebssystem installierst wird, werden keine Felder angeboten.</p>
+  Wenn ShellDetails unter &auml;lteren Betriebssystemen installierst wird, werden keine Felder angeboten.</p>
+      <p>Unter Windows Vista und Windows 7 werden derzeit keine Shellerweiterungen unterst&uuml;tzt. </p>
       <h2>3. Benutzung<a name="use"></a></h2>
       <p>ShellDetails ist ein Inhaltsplugin. Alle Plugins dieses Typen k&ouml;nnen einheitlich benutzt werden. Eine &Uuml;bersicht &uuml;ber die Benutzung von Inhaltsplugins findet sich im <a href="http://www.ghisler.ch/wikide/index.php/Inhaltsplugins">Total Commander Wiki</a>. </p>
       <h2>4. Konfiguration<a name="configuration"></a></h2>
@@ -148,225 +149,8 @@ Cast=10</pre>
         <li>Die Anzeige von Datumswertes weicht um ein paar Sekunden ab. Der Grund daf&uuml;r liegt in der Art und Weise wie die von Windows bereitgestellte Schnittstelle die Datumswerte speichert. Im Windows Explorer tritt das gleiche Problem auf. </li>
         <li>Wenn sich in einem Verzeichnis nur eine Datei befindet und sich eine Dateiinformation &auml;ndert, so muss das Verzeichnis erneut betreten werden, um die Anzeige zu aktualisieren. </li>
   </ol>      
-      <h2>7. Versionschronik <a name="history"></a></h2>
-      <table width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-          <td class="list"><strong>Version 1.12 </strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Felder, die bestimmte nicht erlaubte Zeichen enthielten, wurden nicht korrekt umbenannt.</td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.11</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Felderkennung war versehentlich deaktiviert.</td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.10</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Es ist nun m&ouml;glich eine Zahl ohne Tausendertrennzeichen darzustellen. Dazu muss in der Einstellungsdatei bei dem betreffenden Feld UseDefault auf 0 und Cast auf 3 gesetzt werden. </td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Einige Ressourcenl&ouml;cher wurden gestopft. </td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.09 </strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Es k&ouml;nnen nun auch Zeichenketten in nummerische werte umgewandelt werden. </td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.08 </strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Eine gro&szlig;e Zahl installierter Shellerweiterungen brachte Total Commander w&auml;hrend der Konfiguration der Benutzung von Inhaltsplugins zum Absturz. </td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.07</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Der Feldtyp wurde in einigen F&auml;llen nicht richtig erkannt, was zu einem Abbruch der Feldererkennung f&uuml;hrte. </td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.06 </strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Wenn manuell kein Verzeichnis zur Suche nach Feldern gesetzt war, dann wurden keine neue installierten Shellerweiterungen gefunden.</td>
-        </tr>
-        <tr>
-          <td class="list">GE&Auml;NDERT</td>
-          <td class="list">Der Plugin ist von nun an nicht mehr mit UPX komprimiert. Das hat auf einigen Systemen zu Problemen gef&uuml;hrt. </td>
-        </tr>
-        <tr>
-          <td class="list">GE&Auml;NDERT</td>
-          <td class="list">Das Standardverzeichnis in das die Datei ShellDetails.gespeichert wurdeist nun das gleiche Verzeichnis indem sich auch die Datei Wincmd.ini befindet.</td>
-        </tr>
-        <tr>
-          <td class="list">&nbsp;</td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.05 </strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Aktualisierung funktionierte nicht richtig.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Es kann nun die Beschriftung eines jeden Feldes ge&auml;ndert werden.</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Die Einstellungsdatei wurde in manchen F&auml;llen nicht gespeichert.<br></td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Wenn eine Shell Extension installiert war, die ung&uuml;ltige Zeichen im Feldnamen enthielt, wurde eine Fehlermeldung angezeigt. Diese ung&uuml;ltigen Zeichen werden nun durch einen Unterstrich ersetzt.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Die Verzeichnisse, in denen nach neuen Feldern gesucht wird, k&ouml;nnen nun vom Benutzer festgelegt werden. </td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list" width="17%"><strong>Version 1.04</strong></td>
-          <td class="list" width="83%">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Einige Ressourcenl&ouml;cher wurden gestopft.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Unterst&uuml;tzung f&uuml;r nicht benannte Felder wurde hinzugef&uuml;gt.</td>
-        </tr>
-        <tr>
-          <td class="list">GE&Auml;NDERT</td>
-          <td class="list">Geschwindigkeitsverbesserungen, gerade wenn viele Spalten dargestellt werden. </td>
-        </tr>
-        <tr>
-          <td >&nbsp;</td>
-          <td >&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.03</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">ShellDetails unterst&uuml;tzt nun Hintergrundverarbeitung f&uuml;r die benutzerdefinierte Spaltensicht.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Die neue Feldeinstellung &quot;Prcoessing&quot; (Verarbeitung) wurde hinzugef&uuml;gt. Bitte im Abschnitt &quot;Feldeinstellungen nach weiteren Informationen schauen.</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.02</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Dateityp von Verzeichnissen wurde falsch angezeigt.</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Der Plugin st&uuml;rzte unter Windows 9x und Windows NT 4.0 ab. Das hei&szlig;t aber nicht, dass er jetzt unter diesen Betriebssystemen l&auml;uft. Es werden keine Felder zur Auswahl angeboten.</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Plugin st&uuml;rzte in manchen speziellen Verzeichnissen ab.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Unterst&uuml;tzung f&uuml;r numerische Feldtypen sowie f&uuml;r die Typen DateTime (Datum und Zeit) und Time (Zeit) hinzugef&uuml;gt.</td>
-        </tr>
-        <tr>
-          <td class="list">HINZUGEF&Uuml;GT</td>
-          <td class="list">Unterst&uuml;tzung f&uuml;r Feldeinstellungen hinzugef&uuml;gt. Bitte im Abschnitt &quot;Feldeinstellungen nach weiteren Informationen schauen.</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.01</strong></td>
-          <td class="list">&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list">GE&Auml;NDERT</td>
-          <td class="list">Plugin ist um ein Vielfaches schneller als 1.00.</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Feldinhalte sind nun immer im richtigen Feld.</td>
-        </tr>
-        <tr>
-          <td class="list">KORRIGIERT</td>
-          <td class="list">Feldinhalte f&uuml;r *.lnk-Dateien werden nun angezeigt.</td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="list"><strong>Version 1.00</strong></td>
-          <td class="list">Erste Ver&ouml;ffentlichung.</td>
-        </tr>
-      </table>
-      <h2>8. Kontakt<a name="contact"></a></h2>
+      <h2>7. Kontakt<a name="contact"></a></h2>
       <p>Im <a href="http://www.ghisler.ch/">Total Commander Forum</a> steht ein <a href="http://www.ghisler.ch/board/viewtopic.php?t=9525">Thema</a> bereit, um Probleme, Fehler und Verbesserungsvorschl&auml;ge zu diskutieren.</p>
-      <h2>9. Lizenz<a name="license" id="license"></a></h2>
-      <p>Copyright (C) 2004-2006 Christian Hillbricht, Alle Rechte vorbehalten. Dieser Total Commander plugin ist urheberrechtlich gesch&uuml;tzte Freeware.</p>
 </div>
 </body>
 </html>

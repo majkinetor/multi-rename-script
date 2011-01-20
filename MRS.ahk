@@ -32,9 +32,6 @@ FileEncoding, UTF-8
 	else Preset_Set("[N]>[E]", false) 
 return
 
-Tr( ByRef var ) {
-	Transform, var, FromCodePage, 0, %var%
-}
 
 ;-------------------------------------------------------------------------------------
 ;If 2 arguments are specified on cmd line - file list & preset - don't show GUI initialy, 
@@ -975,8 +972,6 @@ return
 #include inc\m\Accordion.ahk
 
 ;================== Forms ========================
-#include inc\m\Form.ahk
 #include inc\m\Win.ahk
 #include inc\m\Attach.ahk
 #include inc\m\HLink.ahk
-#include inc\m\Panel.ahk
