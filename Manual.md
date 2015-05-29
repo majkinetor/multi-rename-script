@@ -1,0 +1,1 @@
+Manual is available in the application (? link at the lower right end of the window)
