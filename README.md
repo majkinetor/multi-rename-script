@@ -4,4 +4,4 @@ MRS is not limited to finite number of rename actions so you can rename files ba
 
 You can extend application using scripting language and plugins.
 
-![https://raw.githubusercontent.com/majkinetor/multi-rename-script/master/MRS.PNG]
+![https://raw.githubusercontent.com/majkinetor/multi-rename-script/master/MRS.PNG](https://raw.githubusercontent.com/majkinetor/multi-rename-script/master/MRS.PNG)
